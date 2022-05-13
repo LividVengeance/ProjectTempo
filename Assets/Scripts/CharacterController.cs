@@ -16,12 +16,12 @@ public class CharacterController : MonoBehaviour
     private Rigidbody2D Rigidbody2D;
     private Vector3 MoveDirection;
 
+    
     private void Awake()
     {
         Rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         float MoveX = 0f;
