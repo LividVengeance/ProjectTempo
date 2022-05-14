@@ -12,7 +12,7 @@ public class TempManager : MonoBehaviour
     [SerializeField, Tooltip("Amount of time the player can hit to the beat late")] 
     private float PostTempLeniency = 0.5f;
     
-    private UnityEvent TempoUnityEvent;
+    private AudioSource BeatAudioSource;
 
     private float CurrentTime = 0.0f;
     private float TimeBetweenBeats = 0.0f;
@@ -20,7 +20,8 @@ public class TempManager : MonoBehaviour
     
     void Start()
     {
-        TimeBetweenBeats = Tempo / 60.0f;
+        BeatAudioSource = GetComponent<AudioSource>();
+        TimeBetweenBeats = 60.0f / Tempo;
     }
     
     void Update()
@@ -28,15 +29,13 @@ public class TempManager : MonoBehaviour
         CurrentTime += Time.deltaTime;
         if (CurrentTime >= TimeBetweenBeats)
         {
+            BeatAudioSource.Play();
             CurrentTime = 0.0f;
-            TempoUnityEvent.Invoke();
         }
     }
 
     public bool HasHitToTempo()
     {
-        return (CurrentTime + PreTempLeniency >= TimeBetweenBeats 
-                || ((CurrentTime - PreTempLeniency <= TimeBetweenBeats) 
-                    && (CurrentTime - PreTempLeniency >= CurrentTime + PreTempLeniency)));
+        return CurrentTime <= PostTempLeniency || CurrentTime >= TimeBetweenBeats + PreTempLeniency;
     }
 }
