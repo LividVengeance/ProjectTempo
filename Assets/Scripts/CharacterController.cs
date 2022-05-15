@@ -8,18 +8,21 @@ using Vector3 = UnityEngine.Vector3;
 
 public class CharacterController : MonoBehaviour
 {
+    [SerializeField] private InventoryComponent InventoryComponent;
+    [SerializeField] private ActionSystemComponent ActionSystemComponent;
+    
     [SerializeField] private float MoveSpeed = 10f;
 
     private Rigidbody2D Rigidbody2D;
     private Vector3 MoveDirection;
-    
-    private ActionSystemComponent ActionSystem;
 
     
     private void Awake()
     {
         Rigidbody2D = GetComponent<Rigidbody2D>();
-        ActionSystem = GetComponent<ActionSystemComponent>();
+        
+        if (!InventoryComponent) Debug.LogError("No Inventory Component Has Been Assigned To " + gameObject.name);
+        if (!ActionSystemComponent) Debug.LogError("No Action System Component Has Been Assigned To " + gameObject.name);
     }
 
     void Update()
@@ -46,16 +49,15 @@ public class CharacterController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (TempoManager.Instance.HasHitToTempo()) ActionSystem.ChangeAction(ActionSystem.DashActionState);
+            if (TempoManager.Instance.HasHitToTempo()) ActionSystemComponent.ChangeAction(ActionSystemComponent.DashActionState);
             else TempoManager.Instance.GetActionOffBeatUnityEvent().Invoke();
         }
 
         if (Input.GetMouseButtonDown(0)) 
         {
-            if (TempoManager.Instance.HasHitToTempo()) ActionSystem.ChangeAction(ActionSystem.MeleeAttackActionState);
+            if (TempoManager.Instance.HasHitToTempo()) ActionSystemComponent.ChangeAction(ActionSystemComponent.MeleeAttackActionState);
             else TempoManager.Instance.GetActionOffBeatUnityEvent().Invoke();
         }
-        
 
         MoveDirection = new Vector3(MoveX, MoveY).normalized;
     }
@@ -67,4 +69,5 @@ public class CharacterController : MonoBehaviour
 
     public Vector3 GetMoveDirection() => MoveDirection;
     public Rigidbody2D GetHeroRigidbody2D() => Rigidbody2D;
+    public InventoryComponent GetHeroInventoryComponent() => InventoryComponent;
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ActionSystemComponent : MonoBehaviour
 {
-    [SerializeField] private GameplayAction CurrentGameplayAction;
+    private GameplayAction CurrentGameplayAction;
 
     public DashAction DashActionState;
     public MeleeAttackAction MeleeAttackActionState;

@@ -7,6 +7,9 @@ using UnityEngine.Events;
 public class TempoManager : MonoBehaviour
 {
     public static TempoManager Instance { get; private set;  }
+
+    private GameHUD GameHud;
+    private CharacterController HeroCharacter;
     
     [SerializeField, Tooltip("Number of beats per minute")] 
     private int Tempo = 8;
@@ -35,7 +38,10 @@ public class TempoManager : MonoBehaviour
         {
             Instance = this;
         }
-        
+
+        HeroCharacter = GameObject.FindWithTag("Player").GetComponent<CharacterController>();
+        GameHud = GameObject.FindWithTag("GameHUD").GetComponent<GameHUD>();
+        if (!GameHud) Debug.LogError("Unable To Find GameHUD In Scene");
         BeatAudioSource = GetComponent<AudioSource>();
         TimeBetweenBeats = 60.0f / Tempo;
         BeatUnityEvent = new UnityEvent();
@@ -52,9 +58,10 @@ public class TempoManager : MonoBehaviour
             CurrentTime = 0.0f;
         }
     }
-
+    
     public bool HasHitToTempo() => CurrentTime <= PostTempLeniency || CurrentTime >= TimeBetweenBeats + PreTempLeniency;
-
     public UnityEvent GetBeatUnityEvent() => BeatUnityEvent;
     public UnityEvent GetActionOffBeatUnityEvent() => ActionOffBeat;
+    public GameHUD GetGameHUD() => GameHud;
+    public CharacterController GetHeroCharacter() => HeroCharacter;
 }

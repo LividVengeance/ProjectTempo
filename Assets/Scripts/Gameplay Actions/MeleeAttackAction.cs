@@ -11,7 +11,11 @@ public class MeleeAttackAction : AttackAction
     {
         Vector3 MousePositon = GetMouseWorldPosition(Input.mousePosition, Camera.main);
         Vector3 AttackDirection = (MousePositon - GetOwningCharacter().transform.position);
-        Debug.Log(AttackDirection);
-        Debug.DrawRay(GetOwningCharacter().transform.position, AttackDirection, Color.magenta, 3.0f);
+
+        if (bDebugGameplayAction)
+        {
+            Debug.Log(AttackDirection);
+            Debug.DrawRay(GetOwningCharacter().transform.position, AttackDirection, Color.magenta, 3.0f);
+        }
     }
 }
