@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DashAction : GameplayAction
 {
-    [SerializeField] private float DashDistance = 10f;
+    [SerializeField] private float DashDistance = 2f;
     
     
     public DashAction(ActionSystemComponent ActionSystemComponent, GameObject OwningGameObject) 
@@ -13,11 +13,6 @@ public class DashAction : GameplayAction
     public override void StartAction()
     {
         SetWillActionUpdate(false);
-    }
-
-    public override void UpdateAction()
-    {
-        
     }
 
     public override void PhysicsUpdateAction()
@@ -31,10 +26,6 @@ public class DashAction : GameplayAction
         //    DashPosition = RaycastHit.point;
         //}
         GetOwningCharacter().GetHeroRigidbody2D().MovePosition(DashPosition);
-    }
-
-    public override void EndAction()
-    {
-        
+        ActionSystem.ChangeAction(null);
     }
 }

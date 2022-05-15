@@ -7,6 +7,7 @@ public class ActionSystemComponent : MonoBehaviour
     [SerializeField] private GameplayAction CurrentGameplayAction;
 
     public DashAction DashActionState;
+    public MeleeAttackAction MeleeAttackActionState;
 
     void Awake()
     {
@@ -35,11 +36,12 @@ public class ActionSystemComponent : MonoBehaviour
         CurrentGameplayAction?.EndAction();
 
         CurrentGameplayAction = NewAction;
-        CurrentGameplayAction.StartAction();
+        CurrentGameplayAction?.StartAction();
     }
 
     private void InitializeGameplayActions()
     {
         DashActionState = new DashAction(this, this.transform.gameObject);
+        MeleeAttackActionState = new MeleeAttackAction(this, transform.gameObject);
     }
 }

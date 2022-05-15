@@ -4,13 +4,15 @@ public class GameplayAction
 {
     private bool bWillActionUpdate = true;
     private bool bWillActionPhysicsUpdate = true;
-    private GameObject OwningCharacter;
+    private GameObject OwningGameObject;
+    private readonly CharacterController OwningCharacter;
     protected ActionSystemComponent ActionSystem;
     
     public GameplayAction(ActionSystemComponent ActionSystemComponent, GameObject OwningGameObject)
     {
         this.ActionSystem = ActionSystemComponent;
-        this.OwningCharacter = OwningGameObject;
+        this.OwningGameObject = OwningGameObject;
+        this.OwningCharacter = OwningGameObject.GetComponent<CharacterController>();
     }
     
     public virtual void StartAction() { }
@@ -21,10 +23,11 @@ public class GameplayAction
 
     public virtual void EndAction() { }
 
-    public void SetWillActionUpdate(bool bWillUpdate) => bWillActionUpdate = bWillUpdate;
+    protected void SetWillActionUpdate(bool bWillUpdate) => bWillActionUpdate = bWillUpdate;
     public bool WillActionUpdate() => bWillActionUpdate;
-    public void SetWillActionPhysicsUpdate(bool bWillUpdate) => bWillActionPhysicsUpdate = bWillUpdate;
+    protected void SetWillActionPhysicsUpdate(bool bWillUpdate) => bWillActionPhysicsUpdate = bWillUpdate;
     public bool WillActionPhysicsUpdate() => bWillActionPhysicsUpdate;
-    public CharacterController GetOwningCharacter() => OwningCharacter.GetComponent<CharacterController>();
+    protected CharacterController GetOwningCharacter() => OwningCharacter;
 
+    protected Vector3 GetMouseWorldPosition(Vector3 ScreenPosition, Camera WorldCamera) => WorldCamera.ScreenToWorldPoint(ScreenPosition);
 }

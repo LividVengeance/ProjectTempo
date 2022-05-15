@@ -12,8 +12,7 @@ public class CharacterController : MonoBehaviour
 
     private Rigidbody2D Rigidbody2D;
     private Vector3 MoveDirection;
-
-    private TempManager TempoManager;
+    
     private ActionSystemComponent ActionSystem;
 
     
@@ -21,7 +20,6 @@ public class CharacterController : MonoBehaviour
     {
         Rigidbody2D = GetComponent<Rigidbody2D>();
         ActionSystem = GetComponent<ActionSystemComponent>();
-        TempoManager = GameObject.FindWithTag("TempoManager").GetComponent<TempManager>();
     }
 
     void Update()
@@ -48,11 +46,16 @@ public class CharacterController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (TempoManager.HasHitToTempo())
-            {
-                ActionSystem.ChangeAction(ActionSystem.DashActionState);
-            }
+            if (TempoManager.Instance.HasHitToTempo()) ActionSystem.ChangeAction(ActionSystem.DashActionState);
+            else TempoManager.Instance.GetActionOffBeatUnityEvent().Invoke();
         }
+
+        if (Input.GetMouseButtonDown(0)) 
+        {
+            if (TempoManager.Instance.HasHitToTempo()) ActionSystem.ChangeAction(ActionSystem.MeleeAttackActionState);
+            else TempoManager.Instance.GetActionOffBeatUnityEvent().Invoke();
+        }
+        
 
         MoveDirection = new Vector3(MoveX, MoveY).normalized;
     }
