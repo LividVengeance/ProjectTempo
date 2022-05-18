@@ -6,16 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="8b85b2c5-a33c-4a36-bd64-f8bad4404355" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjectTemp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjectTemp/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/GameHUD.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/GameHUD.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/ManagerHub.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/ManagerHub.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ActionSystemComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ActionSystemComponent.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CharacterController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CharacterController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Gameplay Actions/GameplayAction.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Gameplay Actions/GameplayAction.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Gameplay Actions/MeleeAttackAction.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Gameplay Actions/MeleeAttackAction.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Gameplay Actions/DashAction.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Gameplay Actions/DashAction.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/TempoManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/TempoManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/GameHUD.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/GameHUD.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,7 +95,8 @@
       <workItem from="1652516585528" duration="873000" />
       <workItem from="1652589421425" duration="178000" />
       <workItem from="1652589626992" duration="2391000" />
-      <workItem from="1652593213001" duration="12990000" />
+      <workItem from="1652593213001" duration="13675000" />
+      <workItem from="1652857628107" duration="495000" />
     </task>
     <servers />
   </component>

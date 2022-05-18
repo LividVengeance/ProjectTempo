@@ -10,6 +10,7 @@ public class CharacterController : MonoBehaviour
 {
     [SerializeField] private InventoryComponent InventoryComponent;
     [SerializeField] private ActionSystemComponent ActionSystemComponent;
+    [SerializeField] private VitalAttriutesComponent VitalAttriutesComponent;
     
     [SerializeField] private float MoveSpeed = 10f;
 
@@ -17,7 +18,7 @@ public class CharacterController : MonoBehaviour
     private Vector3 MoveDirection;
 
     
-    private void Awake()
+    private void Start()
     {
         Rigidbody2D = GetComponent<Rigidbody2D>();
         
@@ -49,7 +50,11 @@ public class CharacterController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (TempoManager.Instance.HasHitToTempo()) ActionSystemComponent.ChangeAction(ActionSystemComponent.DashActionState);
+            if (TempoManager.Instance.HasHitToTempo())
+            {
+                ActionSystemComponent.ChangeAction(ActionSystemComponent.DashActionState);
+
+            }
             else TempoManager.Instance.GetActionOffBeatUnityEvent().Invoke();
         }
 

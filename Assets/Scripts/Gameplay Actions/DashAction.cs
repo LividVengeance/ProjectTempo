@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DashAction : GameplayAction
 {
-    [SerializeField] private float DashDistance = 2f;
+    private float DashDistance = 2f;
     
     
     public DashAction(ActionSystemComponent ActionSystemComponent, GameObject OwningGameObject) 
@@ -12,6 +12,7 @@ public class DashAction : GameplayAction
     
     public override void StartAction()
     {
+        base.StartAction();
         SetWillActionUpdate(false);
     }
 

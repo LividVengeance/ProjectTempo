@@ -1,18 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 public class ActionSystemComponent : MonoBehaviour
 {
+    [ReadOnly]
     private GameplayAction CurrentGameplayAction;
+    private GameObject OwningCharacter;
 
     public DashAction DashActionState;
     public MeleeAttackAction MeleeAttackActionState;
+    public StruggleAction StruggleActionState;
+    public DeathAction DeathActionState;
 
-    void Awake()
+    void Start()
     {
-        InitializeGameplayActions();
+        OwningCharacter = transform.parent.gameObject;
         CurrentGameplayAction = null;
+        
+        InitializeGameplayActions();
     }
 
     void Update()
@@ -41,7 +48,11 @@ public class ActionSystemComponent : MonoBehaviour
 
     private void InitializeGameplayActions()
     {
-        DashActionState = new DashAction(this, this.transform.gameObject);
-        MeleeAttackActionState = new MeleeAttackAction(this, transform.gameObject);
+        DashActionState = new DashAction(this, OwningCharacter);
+        MeleeAttackActionState = new MeleeAttackAction(this, OwningCharacter);
+        StruggleActionState = new StruggleAction(this, OwningCharacter);
+        DeathActionState = new DeathAction(this, OwningCharacter);   
     }
+
+    public GameObject GetOwningCharacter() => OwningCharacter;
 }

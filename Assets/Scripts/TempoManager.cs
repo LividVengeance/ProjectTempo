@@ -42,6 +42,7 @@ public class TempoManager : MonoBehaviour
         HeroCharacter = GameObject.FindWithTag("Player").GetComponent<CharacterController>();
         GameHud = GameObject.FindWithTag("GameHUD").GetComponent<GameHUD>();
         if (!GameHud) Debug.LogError("Unable To Find GameHUD In Scene");
+        
         BeatAudioSource = GetComponent<AudioSource>();
         TimeBetweenBeats = 60.0f / Tempo;
         BeatUnityEvent = new UnityEvent();
