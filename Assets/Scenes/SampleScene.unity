@@ -274,6 +274,51 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1223735595
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1223735597}
+  - component: {fileID: 1223735596}
+  m_Layer: 0
+  m_Name: TEMP
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1223735596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1223735595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 858293f52869f7342b7757859c6d45a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LocalLootTable: []
+--- !u!4 &1223735597
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1223735595}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 558.8376, y: 487.91718, z: 7.4794445}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1159683631204876429
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -281,9 +326,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1217842094, guid: 29525a31bb603564ead61d389697079e, type: 3}
+      propertyPath: m_BlockingMask.m_Bits
+      value: 63
+      objectReference: {fileID: 0}
     - target: {fileID: 1159683631856241667, guid: 29525a31bb603564ead61d389697079e, type: 3}
       propertyPath: m_Name
       value: GameHUD
+      objectReference: {fileID: 0}
+    - target: {fileID: 1159683631856241693, guid: 29525a31bb603564ead61d389697079e, type: 3}
+      propertyPath: m_BlockingMask.m_Bits
+      value: 63
       objectReference: {fileID: 0}
     - target: {fileID: 1159683631856241694, guid: 29525a31bb603564ead61d389697079e, type: 3}
       propertyPath: m_Pivot.x
@@ -435,6 +488,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1482507175625230651, guid: 3bc1970ae65ee834b813e51e220b6044, type: 3}
+      propertyPath: MaxLevelCap
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 5859567910539797562, guid: 3bc1970ae65ee834b813e51e220b6044, type: 3}
       propertyPath: m_RootOrder
       value: 2

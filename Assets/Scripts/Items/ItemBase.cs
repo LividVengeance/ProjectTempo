@@ -9,4 +9,5 @@ public class ItemBase : ScriptableObject
     public string ShortDescription;
     public string LongDescription;
     public int MaxStackSize = 1;
+    public int CurrentStackSize = 1;
 }
