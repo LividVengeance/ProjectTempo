@@ -11,7 +11,7 @@ public class LootTable : MonoBehaviour
     {
         public ItemBase Item; // Item class to drop
         [Range(1, 100)] public int ItemWeight; // Chance item can drop
-        public int StackSize; // The amount of this item that can drop
+        [MinMaxSlider(1, 999)] public Vector2Int StackSize; // The amount of this item that can drop
     }
 
     [TableList(AlwaysExpanded = true, DrawScrollView = false)]
@@ -25,7 +25,7 @@ public class LootTable : MonoBehaviour
     }
 
     /// Determines what items are going to drop
-    public void CalculateItemsToDrop()
+    private void CalculateItemsToDrop()
     {
         // Ensure there are no items in the list
         ItemsToDrop.Clear();
@@ -36,8 +36,10 @@ public class LootTable : MonoBehaviour
             // Chance the item will drop
             if (ItemDropWeight <= CurrentItem.ItemWeight)
             {
+                int NumberOfItemsToDrop = UnityEngine.Random.Range(CurrentItem.StackSize.x, CurrentItem.StackSize.y);
+
                 // Adds the current item for as many times as the stack size
-                for (int CurrentIndex = 0; CurrentIndex <= CurrentItem.StackSize; CurrentIndex++)
+                for (int CurrentIndex = 0; CurrentIndex <= NumberOfItemsToDrop; CurrentIndex++)
                 {
                     ItemsToDrop.Add(CurrentItem.Item);
                 }
@@ -46,14 +48,15 @@ public class LootTable : MonoBehaviour
     }
 
     /// Modifies the stack size for a given item
-    public void ModifyStackSizeForItem(ItemBase InItem, int NewStackSize)
+    public void ModifyStackSizeForItem(ItemBase InItem, int NewStackSize, bool SetMin)
     {
         foreach (SLootTable CurrentLootItem in LocalLootTable)
         {
             // Check the InItem is the current item
             if (CurrentLootItem.Item.GetType() == InItem.GetType())
             {
-                CurrentLootItem.StackSize = NewStackSize;
+                if (SetMin) CurrentLootItem.StackSize.x = NewStackSize;
+                else CurrentLootItem.StackSize.y = NewStackSize;
                 // Recalculate the items to drop using new stack size
                 CalculateItemsToDrop();
                 return;
@@ -86,4 +89,7 @@ public class LootTable : MonoBehaviour
 
     /// Gets this loot table
     public List<SLootTable> GetLootTable() => LocalLootTable;
+
+    /// Will recalculate the items to drop
+    public void ReroleItemsToDrop() => CalculateItemsToDrop();
 }

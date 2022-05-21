@@ -10,7 +10,7 @@ public class CharacterController : MonoBehaviour
 {
     [SerializeField] private InventoryComponent InventoryComponent;
     [SerializeField] private ActionSystemComponent ActionSystemComponent;
-    [SerializeField] private VitalAttriutesComponent VitalAttriutesComponent;
+    [SerializeField] private VitalAttributesComponent VitalAttributesComponent;
     
     [SerializeField] private float MoveSpeed = 10f;
 

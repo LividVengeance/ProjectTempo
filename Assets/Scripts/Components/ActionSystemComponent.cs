@@ -7,6 +7,7 @@ public class ActionSystemComponent : MonoBehaviour
 {
     [ReadOnly]
     private GameplayAction CurrentGameplayAction;
+
     private GameObject OwningCharacter;
 
     public DashAction DashActionState;
@@ -54,5 +55,10 @@ public class ActionSystemComponent : MonoBehaviour
         DeathActionState = new DeathAction(this, OwningCharacter);   
     }
 
+    // Returns the gameobject of the character that owns this action system
     public GameObject GetOwningCharacter() => OwningCharacter;
+    /// Retruns the current action in this action system
+    public GameplayAction GetCurrentAction() => CurrentGameplayAction;
+    /// Ends the current action
+    public void CancelCurrentAction() => CurrentGameplayAction.EndAction();
 }

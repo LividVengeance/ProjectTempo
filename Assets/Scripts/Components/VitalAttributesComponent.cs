@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class VitalAttriutesComponent : MonoBehaviour
+public class VitalAttributesComponent : MonoBehaviour
 {
     [Header("Health")]
     [SerializeField] private float MaxCharacterHealth;
