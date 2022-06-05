@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f32b0a5a376ef04a9be0eb760e3b47b, type: 3}
   m_Name: TestItem
   m_EditorClassIdentifier: 
+  ItemIcon: {fileID: 2109181785, guid: 368a282949ee937408429f60aec28463, type: 3}
   ItemName: First Item
-  ItemIcon: {fileID: 21300000, guid: 6c784fa21017f4a43b6d9831693e8dad, type: 3}
   ShortDescription: Short Description
   LongDescription: Long Description
   MaxStackSize: 1
+  CurrentStackSize: 1

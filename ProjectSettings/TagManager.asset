@@ -6,6 +6,7 @@ TagManager:
   tags:
   - TempoManager
   - GameHUD
+  - InputManager
   layers:
   - Default
   - TransparentFX

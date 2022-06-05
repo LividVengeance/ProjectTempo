@@ -6,19 +6,64 @@
   <component name="ChangeListManager">
     <list default="true" id="8b85b2c5-a33c-4a36-bd64-f8bad4404355" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjectTemp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjectTemp/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Sirenix/Odin Inspector/Config/Editor/OdinModuleConfig.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Plugins/Sirenix/Odin Inspector/Config/Editor/OdinModuleConfig.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Assests/Sprites/TestExport.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Assests/Sprites/TestExport.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Assests/Sprites/TestExport_0.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Assests/Sprites/TestExport_0.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Assests/Sprites/TestExport_1.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Assests/Sprites/TestExport_1.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Assests/Sprites/TestExport_10.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Assests/Sprites/TestExport_10.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Assests/Sprites/TestExport_11.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Assests/Sprites/TestExport_11.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Assests/Sprites/TestExport_12.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Assests/Sprites/TestExport_12.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Assests/Sprites/TestExport_13.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Assests/Sprites/TestExport_13.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Assests/Sprites/TestExport_14.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Assests/Sprites/TestExport_14.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Assests/Sprites/TestExport_15.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Assests/Sprites/TestExport_15.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Assests/Sprites/TestExport_16.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Assests/Sprites/TestExport_16.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Assests/Sprites/TestExport_17.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Assests/Sprites/TestExport_17.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Assests/Sprites/TestExport_18.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Assests/Sprites/TestExport_18.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Assests/Sprites/TestExport_19.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Assests/Sprites/TestExport_19.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Assests/Sprites/TestExport_2.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Assests/Sprites/TestExport_2.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Assests/Sprites/TestExport_3.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Assests/Sprites/TestExport_3.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Assests/Sprites/TestExport_4.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Assests/Sprites/TestExport_4.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Assests/Sprites/TestExport_5.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Assests/Sprites/TestExport_5.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Assests/Sprites/TestExport_6.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Assests/Sprites/TestExport_6.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Assests/Sprites/TestExport_7.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Assests/Sprites/TestExport_7.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Assests/Sprites/TestExport_8.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Assests/Sprites/TestExport_8.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Assests/Sprites/TestExport_9.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Assests/Sprites/TestExport_9.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Assests/Sprites/TestPalette.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Assests/Sprites/TestPalette.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/ManagerHub.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/ManagerHub.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/PlayerCharacter.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/PlayerCharacter.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/CharacterController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CharacterController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Components/ActionSystemComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Components/ActionSystemComponent.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Components/InventoryComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Components/InventoryComponent.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Components/VitalAttriutesComponent.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Components/VitalAttriutesComponent.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/LootTable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/LootTable.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Components/ProgressionComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Components/ProgressionComponent.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Components/VitalAttributesComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Components/VitalAttributesComponent.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/InputManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/InputManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/TempoManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/TempoManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/GameHUD.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/GameHUD.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/InputManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/InputManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,6 +82,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/GameHUD.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/InventoryItemUI.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/InventoryUI.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@1.3.0/InputSystem/Actions/InputAction.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -110,6 +156,11 @@
       <workItem from="1652857628107" duration="495000" />
       <workItem from="1653112773814" duration="24000" />
       <workItem from="1653127522526" duration="1546000" />
+      <workItem from="1653372484750" duration="3275000" />
+      <workItem from="1653464680832" duration="1458000" />
+      <workItem from="1653468192569" duration="785000" />
+      <workItem from="1653469642386" duration="2000" />
+      <workItem from="1653549347512" duration="2903000" />
     </task>
     <servers />
   </component>

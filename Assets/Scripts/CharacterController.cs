@@ -11,6 +11,8 @@ public class CharacterController : MonoBehaviour
     [SerializeField] private InventoryComponent InventoryComponent;
     [SerializeField] private ActionSystemComponent ActionSystemComponent;
     [SerializeField] private VitalAttributesComponent VitalAttributesComponent;
+    [SerializeField] private ProgressionComponent ProgressionComponent;
+    private InputManager InputManager;
     
     [SerializeField] private float MoveSpeed = 10f;
 
@@ -21,6 +23,7 @@ public class CharacterController : MonoBehaviour
     private void Start()
     {
         Rigidbody2D = GetComponent<Rigidbody2D>();
+        InputManager = TempoManager.Instance.GetInputManager();
         
         if (!InventoryComponent) Debug.LogError("No Inventory Component Has Been Assigned To " + gameObject.name);
         if (!ActionSystemComponent) Debug.LogError("No Action System Component Has Been Assigned To " + gameObject.name);
@@ -31,24 +34,32 @@ public class CharacterController : MonoBehaviour
         float MoveX = 0f;
         float MoveY = 0f;
         
-        if (Input.GetKey(KeyCode.W))
+        if(InputManager.GetMovementInputState().y > 0)
         {
             MoveY += 1f;
         }
-        if (Input.GetKey(KeyCode.S))
+        if (InputManager.GetMovementInputState().y < 0)
         {
             MoveY -= 1f;
         }
-        if (Input.GetKey(KeyCode.A))
+        if (InputManager.GetMovementInputState().x < 0)
         {
             MoveX -= 1f;
         }
-        if (Input.GetKey(KeyCode.D))
+        if (InputManager.GetMovementInputState().x > 0)
         {
             MoveX += 1f;
         }
+        if (InputManager.GetSaveDownInputState())
+        {
+            SavePlayerData();
+        }
+        if (InputManager.GetLoadSaveDownState())
+        {
+            LoadPlayerData();
+        }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (InputManager.GetActionThreeDownInputState())
         {
             if (TempoManager.Instance.HasHitToTempo())
             {
@@ -58,7 +69,7 @@ public class CharacterController : MonoBehaviour
             else TempoManager.Instance.GetActionOffBeatUnityEvent().Invoke();
         }
 
-        if (Input.GetMouseButtonDown(0)) 
+        if (InputManager.GetActionOneDownInputState()) 
         {
             if (TempoManager.Instance.HasHitToTempo()) ActionSystemComponent.ChangeAction(ActionSystemComponent.MeleeAttackActionState);
             else TempoManager.Instance.GetActionOffBeatUnityEvent().Invoke();
@@ -72,7 +83,19 @@ public class CharacterController : MonoBehaviour
         Rigidbody2D.velocity = MoveDirection * MoveSpeed;
     }
 
+    private void SavePlayerData()
+    {
+        SaveSystem.SaveAllPlayerData(this);
+    }
+
+    private void LoadPlayerData()
+    {
+        SaveData Data = SaveSystem.LoadData();
+    }
+
     public Vector3 GetMoveDirection() => MoveDirection;
     public Rigidbody2D GetHeroRigidbody2D() => Rigidbody2D;
     public InventoryComponent GetHeroInventoryComponent() => InventoryComponent;
+    public VitalAttributesComponent GetVitalAttributesComponent() => VitalAttributesComponent;
+    public ProgressionComponent GetProgressionComponent() => ProgressionComponent;
 }

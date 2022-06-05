@@ -9,6 +9,7 @@ public class ProgressionComponent : MonoBehaviour
     // Events
     private UnityEvent CharacterLevelChangeEvent;
 
+    [Header("Leveling")]
     [ShowInInspector, ReadOnly] 
     private int CurrentExperience;
     [SerializeField, Tooltip("The max amount of experience this character can hold. Keep 0 to have no cap")] 
@@ -17,6 +18,9 @@ public class ProgressionComponent : MonoBehaviour
     private int CurrentLevel;
     [SerializeField, Tooltip("The maxium level this charater can be. Keep 0 to have no cap")] 
     private int MaxLevelCap;
+
+    [Header("Currency")]
+    [ShowInInspector, ReadOnly] int Currency;
 
     public void ModifyCharacterExperience(int ModifyAmount)
     {
@@ -68,4 +72,9 @@ public class ProgressionComponent : MonoBehaviour
     }
 
     public UnityEvent GetCharacterLevelChangedEvent() => CharacterLevelChangeEvent;
+    public int GetCharacterCurrentLevel() => CurrentLevel;
+    public int GetCharacterMaxLevel() => MaxLevelCap;
+    public int GetCharacterCurrentExperience() => CurrentExperience;
+
+    public int GetCurrency() => Currency;
 }

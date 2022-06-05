@@ -10,6 +10,7 @@ public class TempoManager : MonoBehaviour
 
     private GameHUD GameHud;
     private CharacterController HeroCharacter;
+    private InputManager InputManager;
     
     [SerializeField, Tooltip("Number of beats per minute")] 
     private int Tempo = 8;
@@ -30,6 +31,7 @@ public class TempoManager : MonoBehaviour
     
     void Awake()
     {
+        // Set up Singleton
         if (Instance != null && Instance != this)
         {
             Destroy(this);
@@ -40,8 +42,11 @@ public class TempoManager : MonoBehaviour
         }
 
         HeroCharacter = GameObject.FindWithTag("Player").GetComponent<CharacterController>();
+        if (!HeroCharacter) Debug.LogError("Unable To Find Hero Character Controller");
         GameHud = GameObject.FindWithTag("GameHUD").GetComponent<GameHUD>();
         if (!GameHud) Debug.LogError("Unable To Find GameHUD In Scene");
+        InputManager = GameObject.FindWithTag("InputManager").GetComponent<InputManager>();
+        if (!InputManager) Debug.LogError("Unable To Find Input Manager");
         
         BeatAudioSource = GetComponent<AudioSource>();
         TimeBetweenBeats = 60.0f / Tempo;
@@ -65,4 +70,5 @@ public class TempoManager : MonoBehaviour
     public UnityEvent GetActionOffBeatUnityEvent() => ActionOffBeat;
     public GameHUD GetGameHUD() => GameHud;
     public CharacterController GetHeroCharacter() => HeroCharacter;
+    public InputManager GetInputManager() => InputManager;  
 }

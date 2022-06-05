@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DashAction : GameplayAction
 {
-    private float DashDistance = 2f;
+    private float DashDistance = .2f;
     
     
     public DashAction(ActionSystemComponent ActionSystemComponent, GameObject OwningGameObject) 
