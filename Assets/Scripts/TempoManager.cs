@@ -12,23 +12,6 @@ public class TempoManager : MonoBehaviour
     private CharacterController HeroCharacter;
     private InputManager InputManager;
     
-    [SerializeField, Tooltip("Number of beats per minute")] 
-    private int Tempo = 8;
-    [SerializeField, Tooltip("Amount of time the player can hit to the beat earlier")] 
-    private float PreTempLeniency = 0.5f;
-    [SerializeField, Tooltip("Amount of time the player can hit to the beat late")] 
-    private float PostTempLeniency = 0.5f;
-    
-    private AudioSource BeatAudioSource;
-    
-    // Events
-    private UnityEvent BeatUnityEvent;
-    private UnityEvent ActionOffBeat;
-
-    private float CurrentTime = 0.0f;
-    private float TimeBetweenBeats = 0.0f;
-    
-    
     void Awake()
     {
         // Set up Singleton
@@ -47,28 +30,9 @@ public class TempoManager : MonoBehaviour
         if (!GameHud) Debug.LogError("Unable To Find GameHUD In Scene");
         InputManager = GameObject.FindWithTag("InputManager").GetComponent<InputManager>();
         if (!InputManager) Debug.LogError("Unable To Find Input Manager");
-        
-        BeatAudioSource = GetComponent<AudioSource>();
-        TimeBetweenBeats = 60.0f / Tempo;
-        BeatUnityEvent = new UnityEvent();
-        ActionOffBeat = new UnityEvent();
     }
     
-    void Update()
-    {
-        CurrentTime += Time.deltaTime;
-        if (CurrentTime >= TimeBetweenBeats)
-        {
-            BeatAudioSource.Play();
-            BeatUnityEvent.Invoke();
-            CurrentTime = 0.0f;
-        }
-    }
-    
-    public bool HasHitToTempo() => CurrentTime <= PostTempLeniency || CurrentTime >= TimeBetweenBeats + PreTempLeniency;
-    public UnityEvent GetBeatUnityEvent() => BeatUnityEvent;
-    public UnityEvent GetActionOffBeatUnityEvent() => ActionOffBeat;
     public GameHUD GetGameHUD() => GameHud;
     public CharacterController GetHeroCharacter() => HeroCharacter;
-    public InputManager GetInputManager() => InputManager;  
+    public InputManager GetInputManager() => InputManager;
 }

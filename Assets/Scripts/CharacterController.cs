@@ -8,12 +8,14 @@ using Vector3 = UnityEngine.Vector3;
 
 public class CharacterController : MonoBehaviour
 {
+    [Header("Components")]
     [SerializeField] private InventoryComponent InventoryComponent;
     [SerializeField] private ActionSystemComponent ActionSystemComponent;
     [SerializeField] private VitalAttributesComponent VitalAttributesComponent;
     [SerializeField] private ProgressionComponent ProgressionComponent;
     private InputManager InputManager;
-    
+
+    [Header("Controller Settings")]
     [SerializeField] private float MoveSpeed = 10f;
 
     private Rigidbody2D Rigidbody2D;
@@ -31,10 +33,20 @@ public class CharacterController : MonoBehaviour
 
     void Update()
     {
+        InputUpdate();
+    }
+
+    private void FixedUpdate()
+    {
+        Rigidbody2D.velocity = MoveDirection * MoveSpeed;
+    }
+
+    private void InputUpdate()
+    {
         float MoveX = 0f;
         float MoveY = 0f;
-        
-        if(InputManager.GetMovementInputState().y > 0)
+
+        if (InputManager.GetMovementInputState().y > 0)
         {
             MoveY += 1f;
         }
@@ -61,26 +73,15 @@ public class CharacterController : MonoBehaviour
 
         if (InputManager.GetActionThreeDownInputState())
         {
-            if (TempoManager.Instance.HasHitToTempo())
-            {
-                ActionSystemComponent.ChangeAction(ActionSystemComponent.DashActionState);
-
-            }
-            else TempoManager.Instance.GetActionOffBeatUnityEvent().Invoke();
+            ActionSystemComponent.ChangeAction(ActionSystemComponent.DashActionState);
         }
 
-        if (InputManager.GetActionOneDownInputState()) 
+        if (InputManager.GetActionOneDownInputState())
         {
-            if (TempoManager.Instance.HasHitToTempo()) ActionSystemComponent.ChangeAction(ActionSystemComponent.MeleeAttackActionState);
-            else TempoManager.Instance.GetActionOffBeatUnityEvent().Invoke();
+            ActionSystemComponent.ChangeAction(ActionSystemComponent.MeleeAttackActionState);
         }
 
         MoveDirection = new Vector3(MoveX, MoveY).normalized;
-    }
-
-    private void FixedUpdate()
-    {
-        Rigidbody2D.velocity = MoveDirection * MoveSpeed;
     }
 
     private void SavePlayerData()

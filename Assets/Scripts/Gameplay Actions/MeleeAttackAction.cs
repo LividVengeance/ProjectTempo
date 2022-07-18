@@ -7,29 +7,11 @@ public class MeleeAttackAction : AttackAction
     public MeleeAttackAction(ActionSystemComponent ActionSystemComponent, GameObject OwningGameObject) 
         : base(ActionSystemComponent, OwningGameObject) { }
 
-    public enum EColliderType
-    {
-        EBoxCollider,
-        ECircleCollider,
-    };
-
-    public enum EAimType
-    {
-        ECursorPosition,
-        ECursorDirection,
-        EPlayerPosition,
-        EPlayerDirection,
-        EClosestEnemyPosition,
-    };
-
-    public EColliderType ColliderType;
-    public EAimType AimType;
-    public Collider2D Collider2D;
-
     public override void StartAction()
     {
         base.StartAction();
         Collider2D = ColliderType == EColliderType.EBoxCollider ? new BoxCollider2D() : new CircleCollider2D();
+
         //Vector3 MousePositon = GetMouseWorldPosition(Input.mousePosition, Camera.main);
         //Vector3 AttackDirection = (MousePositon - GetOwningCharacter().transform.position);
         //
@@ -44,4 +26,6 @@ public class MeleeAttackAction : AttackAction
     {
 
     }
+
+
 }

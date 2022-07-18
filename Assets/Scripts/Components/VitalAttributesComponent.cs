@@ -5,6 +5,9 @@ using Sirenix.OdinInspector;
 
 public class VitalAttributesComponent : MonoBehaviour
 {
+    [Header("Components")]
+    [SerializeField] private ActionSystemComponent ActionSystem;
+
     [Header("Health")]
     [SerializeField] private float MaxCharacterHealth;
     [ShowInInspector, ReadOnly] private float CurrentCharacterHealth;
@@ -14,6 +17,13 @@ public class VitalAttributesComponent : MonoBehaviour
     [SerializeField] private int NumberOfArmourLayers = 0;
     private List<FArmourLayer> ArmourLayers = new List<FArmourLayer>();
 
+    [Header("Invulnerability Stack")]
+    [SerializeField, ReadOnly] private int InvulnerabilityStack;
+    [SerializeField, ReadOnly] List<string> InvulnerabilityHistory = new List<string>();
+
+    [Header("Applied Modifiers")]
+    [SerializeField, ReadOnly] List<DamageModifier> AppliedDamageModifiers = new List<DamageModifier>();
+
     public struct FArmourLayer
     {
         public float MaxLayerHealth;
@@ -22,7 +32,7 @@ public class VitalAttributesComponent : MonoBehaviour
 
     private void Awake()
     {
-        for (int i =0; i < NumberOfArmourLayers; i++)
+        for (int i = 0; i < NumberOfArmourLayers; i++)
         {
             FArmourLayer NewArmourLayer = new FArmourLayer();
             NewArmourLayer.MaxLayerHealth = MaxLayerHealth;
@@ -40,9 +50,19 @@ public class VitalAttributesComponent : MonoBehaviour
         return false; // Won't take damage
     }
 
+    private void Update()
+    {
+        PostProcessDamage();
+    }
+
     public void PostProcessDamage()
     {
-
+        // Start the death action if has no health
+        if (CurrentCharacterHealth <= 0 && !ActionSystem.IsCurrentAction(ActionSystem.DeathActionState))
+        {
+            ActionSystem.ChangeAction(ActionSystem.DeathActionState);
+            Debug.Log(transform.parent.gameObject + " : Started death action");
+        }
     }
 
     public bool HasAnyArmourPercentage()
@@ -65,6 +85,18 @@ public class VitalAttributesComponent : MonoBehaviour
             TotalArmourHealth = CurrentArmourLayer.CurrentLayerHealth;
         }
         return TotalArmourHealth;
+    }
+
+    public void AddInvulnerabilityStack(string SourceName)
+    {
+        InvulnerabilityStack++;
+        InvulnerabilityHistory.Add("Added: " + SourceName);
+    }
+
+    public void RemoveInvulnerabilityStack(string SourceName)
+    {
+        InvulnerabilityStack--;
+        InvulnerabilityHistory.Add("Removed: " + SourceName);
     }
 
     public float GetCharacterCurrentHealth() => CurrentCharacterHealth;

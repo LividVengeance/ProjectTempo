@@ -55,6 +55,11 @@ public class ActionSystemComponent : MonoBehaviour
         DeathActionState = new DeathAction(this, OwningCharacter);   
     }
 
+    public bool IsCurrentAction(GameplayAction InAction)
+    {
+        return CurrentGameplayAction == InAction;
+    }
+
     // Returns the gameobject of the character that owns this action system
     public GameObject GetOwningCharacter() => OwningCharacter;
     /// Retruns the current action in this action system

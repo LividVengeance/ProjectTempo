@@ -66,7 +66,7 @@ public class InputManager : MonoBehaviour
 
     public void DisableCursor()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.None;
         Cursor.visible = false;
     }
 
