@@ -19,10 +19,15 @@ public class GameHUD : MonoBehaviour
     [SerializeField] private GameObject InventoryUIGameobject;
     [SerializeField] private GameObject InventoryUIConentGameobject;
 
+    [Header("Virtual Cursor")]
+    [SerializeField] private VirtualCursor VirtualCursor;
+
+    private CharacterController HeroCharacter;
 
     private void Start()
     {
         InputManager = TempoManager.Instance.GetInputManager();
+        HeroCharacter = TempoManager.Instance.GetHeroCharacter();
     }
 
     private void Update()
@@ -33,21 +38,22 @@ public class GameHUD : MonoBehaviour
             if (InventoryUIGameobject.activeSelf)
             {
                 InventoryUIGameobject.GetComponent<InventoryUI>().CloseInventory();
-                InventoryUIGameobject.SetActive(false);
-
                 InputManager.DisableCursor();
+
+                HeroCharacter.DisableHeroMovement(false);
             }
             // Open Inventory
             else
             {
                 InventoryUIGameobject.GetComponent<InventoryUI>().OpenInventory();
-                InventoryUIGameobject.SetActive(true);
-
                 InputManager.EnableCursor();
+
+                HeroCharacter.DisableHeroMovement(true);
             }
         }
     }
 
     public GameObject GetInventoryUIContent() => InventoryUIConentGameobject;
     public GameObject GetInventoryUIGameObject() => InventoryUIGameobject;
+    public VirtualCursor GetVirtualCursor() => VirtualCursor;
 }

@@ -12,6 +12,7 @@ public class TempoManager : MonoBehaviour
     private CharacterController HeroCharacter;
     private InputManager InputManager;
     
+
     void Awake()
     {
         // Set up Singleton

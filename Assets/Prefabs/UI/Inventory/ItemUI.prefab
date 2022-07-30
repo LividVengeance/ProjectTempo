@@ -344,6 +344,7 @@ GameObject:
   - component: {fileID: 9045820142018970768}
   - component: {fileID: 6903247093203331085}
   - component: {fileID: 5253318518211688834}
+  - component: {fileID: 541787408836207295}
   m_Layer: 0
   m_Name: ItemUI
   m_TagString: Untagged
@@ -426,3 +427,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemImageGameobject: {fileID: 4259281517251768313}
   ItemNameGameobject: {fileID: 8929772031939625226}
+--- !u!114 &541787408836207295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8962686630074815571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d91593c85b64644b954c7220ed2c571, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HoverPopout: {fileID: 0}
+  OnHoverSpeed: 100

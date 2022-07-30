@@ -2,11 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour
 {
     [SerializeField] private GameObject ItemUIPrefab;
     [SerializeField] private Transform InventoryUIContent;
+    [SerializeField] private Button InventoryCloseBttn;
 
     private InventoryComponent InventoryComponent;
     
@@ -18,6 +20,16 @@ public class InventoryUI : MonoBehaviour
         CloseInventory();
         InventoryComponent = TempoManager.Instance.GetHeroCharacter().GetHeroInventoryComponent(); 
         InventoryComponent.GetInventoryUpdateEvent().AddListener(UpdateInventoryUI);
+    }
+
+    private void OnEnable()
+    {
+        InventoryCloseBttn.onClick.AddListener(CloseInventoryDelegate);
+    }
+
+    private void OnDisable()
+    {
+        InventoryCloseBttn.onClick.RemoveAllListeners();
     }
 
     private void UpdateInventoryUI()
@@ -57,4 +69,7 @@ public class InventoryUI : MonoBehaviour
 
         return bCanCloseInventory;
     }
+
+    // Used for delegates, ignores callback
+    private void CloseInventoryDelegate() => CloseInventory();
 }

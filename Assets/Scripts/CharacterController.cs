@@ -17,9 +17,11 @@ public class CharacterController : MonoBehaviour
 
     [Header("Controller Settings")]
     [SerializeField] private float MoveSpeed = 10f;
+    [SerializeField] private int SpeedModifer = 1;
 
     private Rigidbody2D Rigidbody2D;
     private Vector3 MoveDirection;
+    private bool bDisableHeroMovement = false;
 
     
     private void Start()
@@ -38,11 +40,17 @@ public class CharacterController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Rigidbody2D.velocity = MoveDirection * MoveSpeed;
+        float MovementSpeed = SpeedModifer >= 1 ? MoveSpeed * SpeedModifer : MoveSpeed;
+        Rigidbody2D.velocity = MoveDirection * MovementSpeed;
     }
 
     private void InputUpdate()
     {
+        if (bDisableHeroMovement)
+        {
+            return;
+        }
+
         float MoveX = 0f;
         float MoveY = 0f;
 
@@ -94,9 +102,20 @@ public class CharacterController : MonoBehaviour
         SaveData Data = SaveSystem.LoadData();
     }
 
+    public void DisableHeroMovement(bool bInDisable)
+    {
+        bDisableHeroMovement = bInDisable;
+        MoveDirection = Vector3.zero;
+    }
+
+    public bool GetHeroDisabledMovementState() => bDisableHeroMovement;
+    
     public Vector3 GetMoveDirection() => MoveDirection;
     public Rigidbody2D GetHeroRigidbody2D() => Rigidbody2D;
     public InventoryComponent GetHeroInventoryComponent() => InventoryComponent;
     public VitalAttributesComponent GetVitalAttributesComponent() => VitalAttributesComponent;
     public ProgressionComponent GetProgressionComponent() => ProgressionComponent;
+
+    public int GetMovementSpeedModifier() => SpeedModifer;
+    public void SetMovementSpeedModifier(int InSpeed) => SpeedModifer = InSpeed;
 }

@@ -17,7 +17,9 @@ public class VitalAttributesComponent : MonoBehaviour
     [SerializeField] private int NumberOfArmourLayers = 0;
     private List<FArmourLayer> ArmourLayers = new List<FArmourLayer>();
 
-    [Header("Invulnerability Stack")]
+    [Header("Invulnerability")]
+    [SerializeField, ReadOnly] private bool bGodMode = false;
+    [SerializeField, ReadOnly] private bool bTitanMode = false;
     [SerializeField, ReadOnly] private int InvulnerabilityStack;
     [SerializeField, ReadOnly] List<string> InvulnerabilityHistory = new List<string>();
 
@@ -38,6 +40,8 @@ public class VitalAttributesComponent : MonoBehaviour
             NewArmourLayer.MaxLayerHealth = MaxLayerHealth;
             ArmourLayers.Add(NewArmourLayer);
         }
+
+        CurrentCharacterHealth = MaxCharacterHealth;
     }
 
     public void PreProcessDamage()
@@ -47,6 +51,10 @@ public class VitalAttributesComponent : MonoBehaviour
 
     public bool ProcessDamage()
     {
+        if (bGodMode)
+        {
+            return false;
+        }
         return false; // Won't take damage
     }
 
@@ -102,4 +110,10 @@ public class VitalAttributesComponent : MonoBehaviour
     public float GetCharacterCurrentHealth() => CurrentCharacterHealth;
     public float GetCharacterMaxHealth() => MaxCharacterHealth;
     public int GetNumberOfArmourLayers() => ArmourLayers.Count;
+
+    public bool GetGodModeState() => bGodMode;
+    public void SetGodModeState(bool bEnable) => bGodMode = bEnable;
+
+    public bool GetTitanModeState() => bTitanMode;
+    public void SetTitanModeState(bool bEnable) => bTitanMode = bEnable; 
 }
