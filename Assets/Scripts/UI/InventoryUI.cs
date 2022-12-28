@@ -4,19 +4,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InventoryUI : MonoBehaviour
+public class InventoryUI : MenuScreen
 {
     [SerializeField] private GameObject ItemUIPrefab;
     [SerializeField] private Transform InventoryUIContent;
     [SerializeField] private Button InventoryCloseBttn;
 
     private InventoryComponent InventoryComponent;
+    private MenuManager MenuManager;
     
     private bool bCanOpenInventory = true;
     private bool bCanCloseInventory = true;
 
     private void Start()
     {
+        MenuManager = TempoManager.Instance.GetMenuManager();
+        
         CloseInventory();
         InventoryComponent = TempoManager.Instance.GetHeroCharacter().GetHeroInventoryComponent(); 
         InventoryComponent.GetInventoryUpdateEvent().AddListener(UpdateInventoryUI);
@@ -53,7 +56,7 @@ public class InventoryUI : MonoBehaviour
     {
         if (bCanOpenInventory)
         {
-            transform.gameObject.SetActive(true);
+            MenuManager.StartTransitionToScreen(DefaultTransitionSettings);
             UpdateInventoryUI();
         }
 
@@ -64,7 +67,9 @@ public class InventoryUI : MonoBehaviour
     {
         if (bCanCloseInventory)
         {
-            transform.gameObject.SetActive(false);
+            FTrasnistionSettings Settings = DefaultTransitionSettings;
+            Settings.Screen = null;
+            MenuManager.StartTransitionToScreen(Settings);
         }
 
         return bCanCloseInventory;

@@ -11,7 +11,7 @@ public class TempoManager : MonoBehaviour
     private GameHUD GameHud;
     private CharacterController HeroCharacter;
     private InputManager InputManager;
-    
+    private MenuManager MenuManager;
 
     void Awake()
     {
@@ -31,9 +31,12 @@ public class TempoManager : MonoBehaviour
         if (!GameHud) Debug.LogError("Unable To Find GameHUD In Scene");
         InputManager = GameObject.FindWithTag("InputManager").GetComponent<InputManager>();
         if (!InputManager) Debug.LogError("Unable To Find Input Manager");
+        MenuManager = GameObject.FindWithTag("MenuManager").GetComponent<MenuManager>();
+        if (!MenuManager) Debug.LogError("Unable To Find Menu Manager");
     }
     
     public GameHUD GetGameHUD() => GameHud;
     public CharacterController GetHeroCharacter() => HeroCharacter;
     public InputManager GetInputManager() => InputManager;
+    public MenuManager GetMenuManager() => MenuManager;
 }

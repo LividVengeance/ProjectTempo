@@ -7,6 +7,7 @@ TagManager:
   - TempoManager
   - GameHUD
   - InputManager
+  - MenuManager
   layers:
   - Default
   - TransparentFX
@@ -43,4 +44,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: MenuManagerLayer
+    uniqueID: 2805745151
     locked: 0

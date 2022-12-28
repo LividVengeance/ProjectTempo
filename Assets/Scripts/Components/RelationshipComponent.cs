@@ -21,7 +21,7 @@ public class RelationshipComponent : MonoBehaviour
     [SerializeField] private SFaction BelongingFaction;
 
     [SerializeField] private SRelationshipType RelationshipToPlayer;
-    [SerializeField, Tooltip("When warry, number of hits before attacking")] private int HitsToProvoke;
+    [SerializeField, Tooltip("When warry, number of hits before moving to hostile state")] private int HitsToProvoke;
 
     public SRelationshipType GetRelationshipToPlayer() => RelationshipToPlayer;
     public SFaction GetOwningFaction() => BelongingFaction;

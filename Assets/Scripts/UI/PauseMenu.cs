@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PauseMenu : MonoBehaviour
+public class PauseMenu : MenuScreen
 {
     [Header("Screen Objects")]
     [SerializeField] private GameObject PauseScreen;
@@ -14,8 +14,11 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private Button ExitGameBttn;
     [SerializeField] private Button CheatMenuBttn;
 
+    [SerializeField] FTrasnistionSettings TransitionSetings;
+
     private InputManager InputManager;
     private CharacterController HeroCharacter;
+    private MenuManager MenuManager;
 
     private bool bPreInputState = false;
 
@@ -23,6 +26,7 @@ public class PauseMenu : MonoBehaviour
     {
         InputManager = TempoManager.Instance.GetInputManager();
         HeroCharacter = TempoManager.Instance.GetHeroCharacter();
+        MenuManager = TempoManager.Instance.GetMenuManager();
 
         ClosePauseMenu();
 
@@ -91,11 +95,17 @@ public class PauseMenu : MonoBehaviour
 
     private void OpenPauseMenu()
     {
+        TransitionSetings.Delay = 0.0f;
+        TransitionSetings.TransitionTime = 0.15f;
+        TransitionSetings.TransitionType = ETransitionType.Instant;
+        TransitionSetings.Screen = this;
+        TransitionSetings.HoldFadeTime = 0.0f;
+        MenuManager.StartTransitionToScreen(TransitionSetings);
+
         PauseScreen.SetActive(true);
         CheatScreen.SetActive(false);
 
         //TODO: This is goning to cause an issue if the map was in the menu map before opening pause menu 
-        InputManager.EnableCursor();
         InputManager.SwitchToMenuMap();
 
         HeroCharacter.DisableHeroMovement(true);
