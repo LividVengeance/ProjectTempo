@@ -21,7 +21,7 @@ public class InteractiveWidget : MonoBehaviour, IPointerEnterHandler, IPointerEx
     };
     private EWidgetState CurrentWidgetState;
 
-    private void Start()
+    private void OnEnable()
     {
         InputManager = TempoManager.Instance.GetInputManager(); 
         VirtualCursor = InputManager.GetVirtualCursor();

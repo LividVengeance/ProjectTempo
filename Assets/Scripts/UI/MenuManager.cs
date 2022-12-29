@@ -28,8 +28,12 @@ public class MenuManager : MonoBehaviour
     MenuScreen LastActiveScreen = null;
     FTrasnistionSettings DefaultSettings;
 
-    [SerializeField] SpriteRenderer FadeScreen;
+    [Header("Menu Library")]
+    [SerializeField] string ActiveScreenName = "GameHUD";
+    [SerializeField] TempoMenuLibrary TempoMenuLibrary;
 
+    [Header("Fade Screen")]
+    [SerializeField] SpriteRenderer FadeScreen;
     [SerializeField] bool bFadeFromAwake = true;
 
     [Header("Debug")]
@@ -41,31 +45,47 @@ public class MenuManager : MonoBehaviour
 
         // Setup default transitioin settings
         DefaultSettings.TransitionTime = 1.0f;
-        DefaultSettings.Delay = 2.5f;
+        DefaultSettings.Delay = 0.0f;
+        DefaultSettings.HoldFadeTime = 0.5f;
         DefaultSettings.TransitionType = ETransitionType.FadeOut;
+
+        DisableAllMenuScreens();
     }
 
     private void Start()
     {
         InputManager = TempoManager.Instance.GetInputManager();
 
-        if (bFadeFromAwake)
+        FTrasnistionSettings ActiveScreenTransitionSettings = DefaultSettings;
+        ActiveScreenTransitionSettings.Screen = FindScreenOfName(ActiveScreenName);
+        if (ActiveScreenTransitionSettings.Screen)
         {
-            StartCoroutine(InternalTransition(DefaultSettings));
+            ActiveScreenTransitionSettings.TransitionType = bFadeFromAwake ? ETransitionType.FadeToScreen : ETransitionType.Instant;
         }
+        else
+        {
+            ActiveScreenTransitionSettings.TransitionType = bFadeFromAwake ? ETransitionType.FadeOut : ETransitionType.Instant;
+        }
+        StartTransitionToScreen(ActiveScreenTransitionSettings);
     }
 
     public void StartTransitionToScreen(FTrasnistionSettings Settings)
     {
         LastActiveScreen = CurrentActiveScreen;
         CurrentActiveScreen = Settings.Screen;
+        
+        if (CurrentActiveScreen)
+        {
+            CurrentActiveScreen.gameObject.SetActive(true);
+        }
 
         if (bDisplayDebugInfo) Debug.Log("Transition From: " + LastActiveScreen + " Screen To: " + CurrentActiveScreen + " Screen");
 
         StartCoroutine(InternalTransition(Settings));
     }
 
-    IEnumerator InternalTransition(FTrasnistionSettings Settings)
+    /// This should only ever be called through MenuManager::StartTransitionToScreen()
+    private IEnumerator InternalTransition(FTrasnistionSettings Settings)
     {
         yield return new WaitForSeconds(Settings.Delay);
 
@@ -108,6 +128,7 @@ public class MenuManager : MonoBehaviour
                 }
             case ETransitionType.Instant:
                 {
+                    FadeScreen.material.color = new Color(FadeScreen.color.r, FadeScreen.color.g, FadeScreen.color.b, 0);
                     OnTransitoinEnd(Settings);
                     break;
                 }
@@ -119,12 +140,17 @@ public class MenuManager : MonoBehaviour
         }
     }
 
-    void OnTransitoinEnd(FTrasnistionSettings Settings)
+    private void OnTransitoinEnd(FTrasnistionSettings Settings)
     {
-        if (LastActiveScreen) LastActiveScreen.gameObject.SetActive(false);
+        if (LastActiveScreen && LastActiveScreen != CurrentActiveScreen)
+        {
+            LastActiveScreen.SwitchAway();
+            LastActiveScreen.gameObject.SetActive(false);
+        }
         if (CurrentActiveScreen)
         {
             CurrentActiveScreen.gameObject.SetActive(true);
+            CurrentActiveScreen.SwitchTo();
 
             switch (CurrentActiveScreen.GetVirtualCursorType())
             {
@@ -148,13 +174,38 @@ public class MenuManager : MonoBehaviour
         }
     }
 
-    MenuScreen GetLastActiveScreen()
+    private void DisableAllMenuScreens()
+    {
+        for (int Index = TempoMenuLibrary.transform.childCount -1; Index >= 0; Index--)
+        {
+            TempoMenuLibrary.transform.GetChild(Index).gameObject.SetActive(false);
+        }
+    }
+
+    private MenuScreen FindScreenOfName(string ScreenName)
+    {
+        for (int Index = TempoMenuLibrary.transform.childCount -1; Index >= 0; Index--)
+        {
+            if (TempoMenuLibrary.transform.GetChild(Index).name.Equals(ScreenName))
+            {
+                return TempoMenuLibrary.transform.GetChild(Index).GetComponent<MenuScreen>();
+            }
+        }
+        return null;
+    }
+
+    public MenuScreen GetLastActiveScreen()
     {
         return LastActiveScreen;
     }
 
-    MenuScreen GetCurrentActiveScreen()
+    public MenuScreen GetCurrentActiveScreen()
     {
         return CurrentActiveScreen;
+    }
+
+    public VirtualCursor GetVirtualCursor()
+    {
+        return TempoMenuLibrary.GetVirtualCursor();
     }
 }

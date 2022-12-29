@@ -21,7 +21,7 @@ public class CharacterController : MonoBehaviour
 
     private Rigidbody2D Rigidbody2D;
     private Vector3 MoveDirection;
-    private bool bDisableHeroMovement = false;
+    private int DisableHeroMovementStack = 0;
 
     
     private void Start()
@@ -46,7 +46,7 @@ public class CharacterController : MonoBehaviour
 
     private void InputUpdate()
     {
-        if (bDisableHeroMovement)
+        if (DisableHeroMovementStack > 0)
         {
             return;
         }
@@ -102,13 +102,18 @@ public class CharacterController : MonoBehaviour
         SaveData Data = SaveSystem.LoadData();
     }
 
-    public void DisableHeroMovement(bool bInDisable)
+    public void IncrementDisableHeroMovementStack()
     {
-        bDisableHeroMovement = bInDisable;
+        DisableHeroMovementStack++;
         MoveDirection = Vector3.zero;
     }
 
-    public bool GetHeroDisabledMovementState() => bDisableHeroMovement;
+    public void DeincrementDisableHeroMovementStack()
+    {
+        DisableHeroMovementStack--;
+    }
+
+    public bool GetHeroDisabledMovementState() => DisableHeroMovementStack > 0;
     
     public Vector3 GetMoveDirection() => MoveDirection;
     public Rigidbody2D GetHeroRigidbody2D() => Rigidbody2D;

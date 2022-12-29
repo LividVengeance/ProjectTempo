@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 3614911681848705109}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2510042178596804917}
@@ -61,7 +61,7 @@ Transform:
   m_GameObject: {fileID: 7040048493940643817}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1000, y: 1000, z: 1}
+  m_LocalScale: {x: 1000, y: 1000, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8690262583001500818}
@@ -79,7 +79,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db666a551a7064341addded2607d2a4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ActiveScreenName: GameHUD
+  TempoMenuLibrary: {fileID: 0}
   FadeScreen: {fileID: 6608011546689420872}
+  bFadeFromAwake: 1
+  bDisplayDebugInfo: 0
 --- !u!212 &6608011546689420872
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -118,11 +122,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -1489222145
+  m_SortingLayer: 1
+  m_SortingOrder: -1
   m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -187,13 +191,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1506557540568875984, guid: be241c53c5b6144488d8943ac9376cc5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: be241c53c5b6144488d8943ac9376cc5, type: 3}
 --- !u!4 &2510042178596804917 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8147655706258443037, guid: be241c53c5b6144488d8943ac9376cc5, type: 3}
   m_PrefabInstance: {fileID: 6036863791893484072}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4885929831804338814 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1155578928766914646, guid: be241c53c5b6144488d8943ac9376cc5, type: 3}
+  m_PrefabInstance: {fileID: 6036863791893484072}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &272507248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4885929831804338814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30b0cb3ae26a67247a6538525c0a45ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8918936179895669824
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -251,6 +273,84 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c5b2bd2fe204c0d4babc862d305dfb3a, type: 3}
+--- !u!1 &2400775213596745954 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6527731699855439010, guid: c5b2bd2fe204c0d4babc862d305dfb3a, type: 3}
+  m_PrefabInstance: {fileID: 8918936179895669824}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1603332272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2400775213596745954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MoveRepeatDelay: 0.5
+  m_MoveRepeatRate: 0.1
+  m_XRTrackingOrigin: {fileID: 0}
+  m_ActionsAsset: {fileID: -944628639613478452, guid: ac3fabafd4dc54e4ba447f2058db27c3, type: 3}
+  m_PointAction: {fileID: -1027893761332833945, guid: ac3fabafd4dc54e4ba447f2058db27c3, type: 3}
+  m_MoveAction: {fileID: -4840753756514016272, guid: ac3fabafd4dc54e4ba447f2058db27c3, type: 3}
+  m_SubmitAction: {fileID: -1688522234469244642, guid: ac3fabafd4dc54e4ba447f2058db27c3, type: 3}
+  m_CancelAction: {fileID: -8348068250310010488, guid: ac3fabafd4dc54e4ba447f2058db27c3, type: 3}
+  m_LeftClickAction: {fileID: 9078670348336609655, guid: ac3fabafd4dc54e4ba447f2058db27c3, type: 3}
+  m_MiddleClickAction: {fileID: -6975598306370633772, guid: ac3fabafd4dc54e4ba447f2058db27c3, type: 3}
+  m_RightClickAction: {fileID: 2028240891064623572, guid: ac3fabafd4dc54e4ba447f2058db27c3, type: 3}
+  m_ScrollWheelAction: {fileID: -205525537295388566, guid: ac3fabafd4dc54e4ba447f2058db27c3, type: 3}
+  m_TrackedDevicePositionAction: {fileID: -451698715207762362, guid: ac3fabafd4dc54e4ba447f2058db27c3, type: 3}
+  m_TrackedDeviceOrientationAction: {fileID: -6975244167709270075, guid: ac3fabafd4dc54e4ba447f2058db27c3, type: 3}
+  m_DeselectOnBackgroundClick: 1
+  m_PointerBehavior: 0
+--- !u!114 &1603332273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2400775213596745954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 10
+--- !u!114 &1603332276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2400775213596745954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: ac3fabafd4dc54e4ba447f2058db27c3, type: 3}
+  m_NotificationBehavior: 3
+  m_UIInputModule: {fileID: 1603332272}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: Keyboard&Mouse
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!4 &7941214047235763010 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1581521210890256130, guid: c5b2bd2fe204c0d4babc862d305dfb3a, type: 3}

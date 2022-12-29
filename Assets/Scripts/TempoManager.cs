@@ -6,12 +6,14 @@ using UnityEngine.Events;
 
 public class TempoManager : MonoBehaviour
 {
-    public static TempoManager Instance { get; private set;  }
+    public static TempoManager Instance { get; private set; }
 
     private GameHUD GameHud;
     private CharacterController HeroCharacter;
     private InputManager InputManager;
     private MenuManager MenuManager;
+
+    private int PauseStack = 0;
 
     void Awake()
     {
@@ -33,6 +35,24 @@ public class TempoManager : MonoBehaviour
         if (!InputManager) Debug.LogError("Unable To Find Input Manager");
         MenuManager = GameObject.FindWithTag("MenuManager").GetComponent<MenuManager>();
         if (!MenuManager) Debug.LogError("Unable To Find Menu Manager");
+    }
+
+    public void IncrimentPauseStack()
+    {
+        PauseStack++;
+        if (PauseStack > 0)
+        {
+            Time.timeScale = 0;
+        }
+    }
+
+    public void DeincremnetPauseStack()
+    {
+        PauseStack--;
+        if (PauseStack <= 0)
+        {
+            Time.timeScale = 1;
+        }
     }
     
     public GameHUD GetGameHUD() => GameHud;

@@ -49,7 +49,7 @@ public class InputManager : MonoBehaviour
     {
         ActionInputMaster = new InputMaster();
         CurrentMouse = Mouse.current;
-        VirtualCursor = TempoManager.Instance.GetGameHUD().GetVirtualCursor();
+        VirtualCursor = TempoManager.Instance.GetMenuManager().GetVirtualCursor();
 
         ActionInputMaster.Game.Movement.performed += ctx => GameInputStruct.Movement = ctx.ReadValue<Vector2>(); 
         ActionInputMaster.Game.Movement.canceled += ctx => GameInputStruct.Movement = ctx.ReadValue<Vector2>();

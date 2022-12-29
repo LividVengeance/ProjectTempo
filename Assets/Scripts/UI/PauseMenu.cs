@@ -14,19 +14,18 @@ public class PauseMenu : MenuScreen
     [SerializeField] private Button ExitGameBttn;
     [SerializeField] private Button CheatMenuBttn;
 
-    [SerializeField] FTrasnistionSettings TransitionSetings;
-
+    private TempoManager TempoManager;
     private InputManager InputManager;
     private CharacterController HeroCharacter;
     private MenuManager MenuManager;
 
-    private bool bPreInputState = false;
 
-    private void Start()
+    private void OnEnable()
     {
-        InputManager = TempoManager.Instance.GetInputManager();
-        HeroCharacter = TempoManager.Instance.GetHeroCharacter();
-        MenuManager = TempoManager.Instance.GetMenuManager();
+        TempoManager = TempoManager.Instance;
+        InputManager = TempoManager.GetInputManager();
+        HeroCharacter = TempoManager.GetHeroCharacter();
+        MenuManager = TempoManager.GetMenuManager();
 
         ClosePauseMenu();
 
@@ -37,20 +36,8 @@ public class PauseMenu : MenuScreen
 
     private void Update()
     {
-        // Open pause menu
-        if (InputManager.GetGamePauseDownInputState())
-        {
-            bPreInputState = HeroCharacter.GetHeroDisabledMovementState();
-            OpenPauseMenu();
-            
-        }
-        // Close menu
-        else if (InputManager.GetMenuUnpauseDownInputState())
-        {
-            ClosePauseMenu();
-        }
         // Back
-        else if (InputManager.GetMenuCancelDownState())
+        if (InputManager.GetMenuCancelDownState())
         {
             if (PauseScreen.activeSelf)
             {
@@ -67,9 +54,6 @@ public class PauseMenu : MenuScreen
     {
         PauseScreen.SetActive(false);
         CheatScreen.SetActive(true);
-
-        // Ensure the cursor is enabled
-        InputManager.EnableCursor();
     }
 
     private void OnExitGamePressed()
@@ -81,26 +65,28 @@ public class PauseMenu : MenuScreen
 #endif
     }
 
-    private void ClosePauseMenu()
+    public void ClosePauseMenu()
     {
         PauseScreen.SetActive(false);
         CheatScreen.SetActive(false);
+        FTrasnistionSettings Settings = InstantTransitionSettings;
+        Settings.Screen = GetGameHUD();
+        MenuManager.StartTransitionToScreen(Settings);
+
+        TempoManager.DeincremnetPauseStack();
 
         //TODO: This is goning to cause an issue if the map was in the menu map before opening pause menu 
         InputManager.SwitchToGameMap();
-        InputManager.DisableCursor();
 
-        HeroCharacter.DisableHeroMovement(bPreInputState);
+        HeroCharacter.DeincrementDisableHeroMovementStack();
     }
 
-    private void OpenPauseMenu()
+    public void OpenPauseMenu()
     {
-        TransitionSetings.Delay = 0.0f;
-        TransitionSetings.TransitionTime = 0.15f;
-        TransitionSetings.TransitionType = ETransitionType.Instant;
-        TransitionSetings.Screen = this;
-        TransitionSetings.HoldFadeTime = 0.0f;
-        MenuManager.StartTransitionToScreen(TransitionSetings);
+        gameObject.SetActive(true);
+        MenuManager.StartTransitionToScreen(InstantTransitionSettings);
+
+        TempoManager.IncrimentPauseStack();
 
         PauseScreen.SetActive(true);
         CheatScreen.SetActive(false);
@@ -108,6 +94,6 @@ public class PauseMenu : MenuScreen
         //TODO: This is goning to cause an issue if the map was in the menu map before opening pause menu 
         InputManager.SwitchToMenuMap();
 
-        HeroCharacter.DisableHeroMovement(true);
+        HeroCharacter.IncrementDisableHeroMovementStack();
     }
 }

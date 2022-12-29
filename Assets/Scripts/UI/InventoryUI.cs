@@ -67,9 +67,7 @@ public class InventoryUI : MenuScreen
     {
         if (bCanCloseInventory)
         {
-            FTrasnistionSettings Settings = DefaultTransitionSettings;
-            Settings.Screen = null;
-            MenuManager.StartTransitionToScreen(Settings);
+            MenuManager.StartTransitionToScreen(DefaultTransitionSettings);
         }
 
         return bCanCloseInventory;
