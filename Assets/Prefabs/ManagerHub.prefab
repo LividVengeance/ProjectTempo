@@ -79,7 +79,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db666a551a7064341addded2607d2a4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ActiveScreenName: GameHUD
+  ActiveScreenName: HUDScreen
   TempoMenuLibrary: {fileID: 0}
   FadeScreen: {fileID: 6608011546689420872}
   bFadeFromAwake: 1

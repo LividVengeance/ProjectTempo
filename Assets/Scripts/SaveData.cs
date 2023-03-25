@@ -18,7 +18,7 @@ public class SaveData
 
     public float[] SD_CurrentPlayerPosition;
 
-    public SaveData(CharacterController PlayerCharacter)
+    public SaveData(HeroCharacter PlayerCharacter)
     {
         // Player Position
         SD_CurrentPlayerPosition = new float[3];

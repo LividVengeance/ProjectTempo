@@ -13,7 +13,7 @@ public class CheatMenu : MonoBehaviour
     [SerializeField] private Toggle OneHitKillToggle;
     [SerializeField] private TMP_Dropdown SpeedModifierDropDown;
 
-    private CharacterController HeroCharacter;
+    private HeroCharacter HeroCharacter;
 
 
     private void Start()
@@ -80,6 +80,6 @@ public class CheatMenu : MonoBehaviour
     private void OnSpeedModifierDropDownChanged(TMP_Dropdown InDropDown)
     {
         Debug.Log("Dropdown changed");
-        HeroCharacter.SetMovementSpeedModifier((int)InDropDown.value);
+        HeroCharacter.GetHeroController().SetMovementSpeedModifier((int)InDropDown.value);
     }
 }

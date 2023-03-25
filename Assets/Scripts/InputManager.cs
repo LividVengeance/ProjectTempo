@@ -16,61 +16,105 @@ public class InputManager : MonoBehaviour
 
     private InputMaster ActionInputMaster;
     private FGameMapInputs GameInputStruct = new FGameMapInputs();
-    private FMenuMapInput MenuInputStruct = new FMenuMapInput();
     private Mouse CurrentMouse;
     private VirtualCursor VirtualCursor;
+    private MenuManager MenuManager;
+
+    private HeroPlayerController HeroPlayerController;
 
     private bool bCursorEnabled = false;
-    
+
+    public enum EInputType
+    {
+        KeyboardMouse,
+        Gamepad,
+    }
+
     public struct FGameMapInputs
     {
         public Vector2 Movement;
-        
-        public bool InteractDown;
-        
-        public bool SaveDown;
-        public bool LoadSaveDown;
-
-        public bool ActionOneDown;
-        public bool ActionTwoDown;
-        public bool ActionThreeDown;
-
-        public bool InventoryDown;
-        public bool PauseDown;
     }
 
-    public struct FMenuMapInput
-    {
-        public bool UnpauseDown;
-        public bool CancelDown;
-    };
-    
     private void Awake()
     {
         ActionInputMaster = new InputMaster();
         CurrentMouse = Mouse.current;
         VirtualCursor = TempoManager.Instance.GetMenuManager().GetVirtualCursor();
+        HeroPlayerController = TempoManager.Instance.GetHeroCharacter().GetHeroController();
+        MenuManager = TempoManager.Instance.GetMenuManager();
 
-        ActionInputMaster.Game.Movement.performed += ctx => GameInputStruct.Movement = ctx.ReadValue<Vector2>(); 
+        SwitchToGameMap();
+
+        // Setup input delegates
+        ActionInputMaster.Game.Movement.performed += ctx => GameInputStruct.Movement = ctx.ReadValue<Vector2>();
         ActionInputMaster.Game.Movement.canceled += ctx => GameInputStruct.Movement = ctx.ReadValue<Vector2>();
+        ActionInputMaster.Game.Movement.performed += OnInputActionDown;
+        ActionInputMaster.Game.Movement.canceled += OnInputActionDown;
+
+        // Save load
+        ActionInputMaster.Game.Save.started += OnInputActionDown;
+        ActionInputMaster.Game.Save.canceled += OnInputActionDown;
+        ActionInputMaster.Game.LoadSave.started += OnInputActionDown;
+        ActionInputMaster.Game.LoadSave.canceled += OnInputActionDown;
+
+        // Action keys
+        ActionInputMaster.Game.ActionOne.started += OnInputActionDown;
+        ActionInputMaster.Game.ActionOne.canceled += OnInputActionDown;
+        ActionInputMaster.Game.ActionTwo.started += OnInputActionDown;
+        ActionInputMaster.Game.ActionTwo.canceled += OnInputActionDown;
+        ActionInputMaster.Game.ActionThree.started += OnInputActionDown;
+        ActionInputMaster.Game.ActionThree.canceled += OnInputActionDown;
+
+        ActionInputMaster.Game.OpenCloseInventory.started += OnInputActionDown;
+        ActionInputMaster.Game.OpenCloseInventory.canceled += OnInputActionDown;
+        ActionInputMaster.Game.Pause.started += OnInputActionDown;
+        ActionInputMaster.Game.Pause.canceled += OnInputActionDown;
+
+        ActionInputMaster.Menu.Unpause.started += OnInputActionDown;
+        ActionInputMaster.Menu.Unpause.canceled += OnInputActionDown;
+        ActionInputMaster.Menu.Cancel.started += OnInputActionDown;
+        ActionInputMaster.Menu.Cancel.canceled += OnInputActionDown;
+    }
+
+    //TODO: This delegate is not being fired on input action performed
+    public void OnInputActionDown(InputAction.CallbackContext InContext)
+    {
+        bool bHandledInput = false;
+        // Slate input handling
+        if (MenuManager)
+        {
+            switch (InContext.phase)
+            {
+                case InputActionPhase.Started:
+                {
+                    bHandledInput = MenuManager.OnActionDown(InContext.action.name);
+                    break;
+                }
+                case InputActionPhase.Canceled:
+                {
+                    bHandledInput = MenuManager.OnActionUp(InContext.action.name);
+                    break;
+                }
+                default:
+                {
+                    break;
+                }
+            }
+        }
+
+        if (bHandledInput)
+        {
+            return;
+        }
+
+        if (HeroPlayerController)
+        {
+            HeroPlayerController.OnInputActionRecieved(InContext);
+        }
     }
 
     private void OnEnable() => ActionInputMaster.Enable();
     private void OnDisable() => ActionInputMaster.Disable();
-
-    private void Update()
-    {
-        GameInputStruct.SaveDown = ActionInputMaster.Game.Save.triggered;
-        GameInputStruct.LoadSaveDown = ActionInputMaster.Game.LoadSave.triggered;
-        GameInputStruct.ActionOneDown = ActionInputMaster.Game.ActionOne.triggered;
-        GameInputStruct.ActionTwoDown = ActionInputMaster.Game.ActionTwo.triggered;
-        GameInputStruct.ActionThreeDown = ActionInputMaster.Game.ActionThree.triggered;
-        GameInputStruct.InventoryDown = ActionInputMaster.Game.OpenCloseInventory.triggered;
-        GameInputStruct.PauseDown = ActionInputMaster.Game.Pause.triggered;
-
-        MenuInputStruct.UnpauseDown = ActionInputMaster.Menu.Unpause.triggered;
-        MenuInputStruct.CancelDown = ActionInputMaster.Menu.Cancel.triggered;
-    }
 
     public void EnableCursor()
     {
@@ -129,31 +173,7 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    // Game Map
     public Vector2 GetMovementInputState() => GameInputStruct.Movement;
-
-    public bool GetInteractDownInputState() => GameInputStruct.InteractDown;
-
-    public bool GetSaveDownInputState() => GameInputStruct.SaveDown;
-    public bool GetLoadSaveDownState() => GameInputStruct.LoadSaveDown;
-
-    public bool GetActionOneDownInputState() => GameInputStruct.ActionOneDown;
-    public bool GetActionTwoDownInputState() => GameInputStruct.ActionTwoDown;
-    public bool GetActionThreeDownInputState() => GameInputStruct.ActionThreeDown;
-
-    public bool GetInventoryDownInputState() => GameInputStruct.InventoryDown;
-    public bool GetGamePauseDownInputState() => GameInputStruct.PauseDown;
-
-    // Menu Map
-    public bool GetMenuCancelDownState() => MenuInputStruct.CancelDown;
-    public bool GetMenuUnpauseDownInputState() => MenuInputStruct.UnpauseDown;
-
-    // Maps
-    public void EnableGameInputs() => ActionInputMaster.Game.Enable();
-    public void DisableGameInputs() => ActionInputMaster.Game.Disable();
-
-    public void EnableMenuInputs() => ActionInputMaster.Menu.Enable();
-    public void DisableMenuInputs() => ActionInputMaster.Menu.Disable();
 
     // Cursor
     public bool IsCursorEnabled() => bCursorEnabled;

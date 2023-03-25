@@ -29,7 +29,7 @@ public class MenuManager : MonoBehaviour
     FTrasnistionSettings DefaultSettings;
 
     [Header("Menu Library")]
-    [SerializeField] string ActiveScreenName = "GameHUD";
+    [SerializeField] string ActiveScreenName = "HUDScreen";
     [SerializeField] TempoMenuLibrary TempoMenuLibrary;
 
     [Header("Fade Screen")]
@@ -174,6 +174,27 @@ public class MenuManager : MonoBehaviour
         }
     }
 
+    /// Handle pressed input for the current active screen. RetrunVal: has input been handled
+    public bool OnActionDown(string InActionName)
+    {
+        // Handle current screen input
+        if (CurrentActiveScreen)
+        {
+            return CurrentActiveScreen.OnActionDown(InActionName);
+        }
+        return false;
+    }
+
+    /// Handle released input for the current active screen. RetrunVal: has input been handled
+    public bool OnActionUp(string InActionName)
+    {
+        if (CurrentActiveScreen)
+        {
+            return CurrentActiveScreen.OnActionUp(InActionName);
+        }
+        return false;
+    }
+
     private void DisableAllMenuScreens()
     {
         for (int Index = TempoMenuLibrary.transform.childCount -1; Index >= 0; Index--)
@@ -191,7 +212,23 @@ public class MenuManager : MonoBehaviour
                 return TempoMenuLibrary.transform.GetChild(Index).GetComponent<MenuScreen>();
             }
         }
+        Debug.LogError("Unable to find screen of name: " + ScreenName);
         return null;
+    }
+
+    /// Start transition to the hud screen using default settings
+    public void StartTransitionToHUDScreen()
+    {
+        FTrasnistionSettings HUDcreenTransitionSettings = DefaultSettings;
+        HUDcreenTransitionSettings.Screen = FindScreenOfName("HUDScreen");
+        StartTransitionToScreen(HUDcreenTransitionSettings);
+    }
+
+    /// Start transition to the hud screen using given settings. Note: FTrasnistionSettings' menu screen will be ignored
+    public void StartTransitionToHUDScreen(FTrasnistionSettings Settings)
+    {
+        Settings.Screen = FindScreenOfName("HUDScreen");
+        StartTransitionToScreen(Settings);
     }
 
     public MenuScreen GetLastActiveScreen()
@@ -207,5 +244,10 @@ public class MenuManager : MonoBehaviour
     public VirtualCursor GetVirtualCursor()
     {
         return TempoMenuLibrary.GetVirtualCursor();
+    }
+
+    public TempoMenuLibrary GetMenuLibrary()
+    {
+        return TempoMenuLibrary;
     }
 }

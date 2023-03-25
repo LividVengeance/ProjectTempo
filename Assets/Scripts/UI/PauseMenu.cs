@@ -16,7 +16,7 @@ public class PauseMenu : MenuScreen
 
     private TempoManager TempoManager;
     private InputManager InputManager;
-    private CharacterController HeroCharacter;
+    private HeroCharacter HeroCharacter;
     private MenuManager MenuManager;
 
 
@@ -34,20 +34,35 @@ public class PauseMenu : MenuScreen
         CheatMenuBttn.onClick.AddListener(OnCheatMenuPressed);
     }
 
-    private void Update()
+    public override bool OnActionDown(string InActionName)
     {
-        // Back
-        if (InputManager.GetMenuCancelDownState())
+        bool bHandledInput = false;
+        if (InActionName == "OpenCloseInventory")
+        {
+            if (PauseScreen.activeSelf)
+            {
+                ClosePauseMenu();
+                bHandledInput = true;
+            }
+            else if (CheatScreen.activeSelf)
+            {
+                OpenPauseMenu();
+                bHandledInput = true;
+            }
+        }
+        else if (InActionName == "Pause" || InActionName == "Unpause")
         {
             if (PauseScreen.activeSelf)
             {
                 ClosePauseMenu();
             }
-            else if (CheatScreen.activeSelf)
+            else
             {
                 OpenPauseMenu();
             }
+            bHandledInput = true;
         }
+        return bHandledInput;
     }
 
     private void OnCheatMenuPressed()
@@ -69,16 +84,13 @@ public class PauseMenu : MenuScreen
     {
         PauseScreen.SetActive(false);
         CheatScreen.SetActive(false);
-        FTrasnistionSettings Settings = InstantTransitionSettings;
-        Settings.Screen = GetGameHUD();
-        MenuManager.StartTransitionToScreen(Settings);
+        MenuManager.StartTransitionToHUDScreen();
 
         TempoManager.DeincremnetPauseStack();
 
-        //TODO: This is goning to cause an issue if the map was in the menu map before opening pause menu 
         InputManager.SwitchToGameMap();
 
-        HeroCharacter.DeincrementDisableHeroMovementStack();
+        HeroCharacter.GetHeroController().DeincrementDisableHeroMovementStack();
     }
 
     public void OpenPauseMenu()
@@ -91,9 +103,10 @@ public class PauseMenu : MenuScreen
         PauseScreen.SetActive(true);
         CheatScreen.SetActive(false);
 
-        //TODO: This is goning to cause an issue if the map was in the menu map before opening pause menu 
         InputManager.SwitchToMenuMap();
 
-        HeroCharacter.IncrementDisableHeroMovementStack();
+        HeroCharacter.GetHeroController().IncrementDisableHeroMovementStack();
     }
+
+    public bool IsPauseScreenOpen() => gameObject.activeSelf;
 }

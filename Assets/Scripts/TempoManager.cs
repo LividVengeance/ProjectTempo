@@ -8,10 +8,12 @@ public class TempoManager : MonoBehaviour
 {
     public static TempoManager Instance { get; private set; }
 
-    private GameHUD GameHud;
-    private CharacterController HeroCharacter;
+    private HUDScreen GameHud;
+    private HeroCharacter HeroCharacter;
     private InputManager InputManager;
     private MenuManager MenuManager;
+
+    private TempoGameUserSettings GameUserSettings; // This will likely need to moved later 
 
     private int PauseStack = 0;
 
@@ -27,14 +29,16 @@ public class TempoManager : MonoBehaviour
             Instance = this;
         }
 
-        HeroCharacter = GameObject.FindWithTag("Player").GetComponent<CharacterController>();
+        HeroCharacter = GameObject.FindWithTag("Player").GetComponent<HeroCharacter>();
         if (!HeroCharacter) Debug.LogError("Unable To Find Hero Character Controller");
-        GameHud = GameObject.FindWithTag("GameHUD").GetComponent<GameHUD>();
+        GameHud = GameObject.FindWithTag("GameHUD").GetComponent<HUDScreen>();
         if (!GameHud) Debug.LogError("Unable To Find GameHUD In Scene");
         InputManager = GameObject.FindWithTag("InputManager").GetComponent<InputManager>();
         if (!InputManager) Debug.LogError("Unable To Find Input Manager");
         MenuManager = GameObject.FindWithTag("MenuManager").GetComponent<MenuManager>();
         if (!MenuManager) Debug.LogError("Unable To Find Menu Manager");
+
+        GameUserSettings = GetComponent<TempoGameUserSettings>();
     }
 
     public void IncrimentPauseStack()
@@ -55,8 +59,9 @@ public class TempoManager : MonoBehaviour
         }
     }
     
-    public GameHUD GetGameHUD() => GameHud;
-    public CharacterController GetHeroCharacter() => HeroCharacter;
+    public HUDScreen GetGameHUD() => GameHud;
+    public HeroCharacter GetHeroCharacter() => HeroCharacter;
     public InputManager GetInputManager() => InputManager;
     public MenuManager GetMenuManager() => MenuManager;
+    public TempoGameUserSettings GetGameUserSettings() => GameUserSettings;
 }

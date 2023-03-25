@@ -6,121 +6,38 @@ using UnityEngine;
 using UnityEngine.XR;
 using Vector3 = UnityEngine.Vector3;
 
-public class CharacterController : MonoBehaviour
+public class TempoCharacterController : MonoBehaviour
 {
-    [Header("Components")]
-    [SerializeField] private InventoryComponent InventoryComponent;
-    [SerializeField] private ActionSystemComponent ActionSystemComponent;
-    [SerializeField] private VitalAttributesComponent VitalAttributesComponent;
-    [SerializeField] private ProgressionComponent ProgressionComponent;
-    private InputManager InputManager;
+    protected InputManager InputManager;
 
     [Header("Controller Settings")]
     [SerializeField] private float MoveSpeed = 10f;
     [SerializeField] private int SpeedModifer = 1;
 
-    private Rigidbody2D Rigidbody2D;
-    private Vector3 MoveDirection;
-    private int DisableHeroMovementStack = 0;
-
+    protected Rigidbody2D Rigidbody2D;
+    protected Vector3 MoveDirection;
+    protected TempoCharacter OwningCharacter;
+    
     
     private void Start()
     {
         Rigidbody2D = GetComponent<Rigidbody2D>();
         InputManager = TempoManager.Instance.GetInputManager();
-        
-        if (!InventoryComponent) Debug.LogError("No Inventory Component Has Been Assigned To " + gameObject.name);
-        if (!ActionSystemComponent) Debug.LogError("No Action System Component Has Been Assigned To " + gameObject.name);
-    }
 
-    void Update()
-    {
-        InputUpdate();
+        OwningCharacter = GetComponent<TempoCharacter>();
+        if (!OwningCharacter) Debug.LogError("Character: " + this + " must have an owning TempoCharacter");
     }
 
     private void FixedUpdate()
     {
-        float MovementSpeed = SpeedModifer >= 1 ? MoveSpeed * SpeedModifer : MoveSpeed;
+        float MovementSpeed = MoveSpeed * SpeedModifer;
         Rigidbody2D.velocity = MoveDirection * MovementSpeed;
     }
 
-    private void InputUpdate()
-    {
-        if (DisableHeroMovementStack > 0)
-        {
-            return;
-        }
-
-        float MoveX = 0f;
-        float MoveY = 0f;
-
-        if (InputManager.GetMovementInputState().y > 0)
-        {
-            MoveY += 1f;
-        }
-        if (InputManager.GetMovementInputState().y < 0)
-        {
-            MoveY -= 1f;
-        }
-        if (InputManager.GetMovementInputState().x < 0)
-        {
-            MoveX -= 1f;
-        }
-        if (InputManager.GetMovementInputState().x > 0)
-        {
-            MoveX += 1f;
-        }
-        if (InputManager.GetSaveDownInputState())
-        {
-            SavePlayerData();
-        }
-        if (InputManager.GetLoadSaveDownState())
-        {
-            LoadPlayerData();
-        }
-
-        if (InputManager.GetActionThreeDownInputState())
-        {
-            ActionSystemComponent.ChangeAction(ActionSystemComponent.DashActionState);
-        }
-
-        if (InputManager.GetActionOneDownInputState())
-        {
-            ActionSystemComponent.ChangeAction(ActionSystemComponent.MeleeAttackActionState);
-        }
-
-        MoveDirection = new Vector3(MoveX, MoveY).normalized;
-    }
-
-    private void SavePlayerData()
-    {
-        SaveSystem.SaveAllPlayerData(this);
-    }
-
-    private void LoadPlayerData()
-    {
-        SaveData Data = SaveSystem.LoadData();
-    }
-
-    public void IncrementDisableHeroMovementStack()
-    {
-        DisableHeroMovementStack++;
-        MoveDirection = Vector3.zero;
-    }
-
-    public void DeincrementDisableHeroMovementStack()
-    {
-        DisableHeroMovementStack--;
-    }
-
-    public bool GetHeroDisabledMovementState() => DisableHeroMovementStack > 0;
-    
     public Vector3 GetMoveDirection() => MoveDirection;
     public Rigidbody2D GetHeroRigidbody2D() => Rigidbody2D;
-    public InventoryComponent GetHeroInventoryComponent() => InventoryComponent;
-    public VitalAttributesComponent GetVitalAttributesComponent() => VitalAttributesComponent;
-    public ProgressionComponent GetProgressionComponent() => ProgressionComponent;
 
     public int GetMovementSpeedModifier() => SpeedModifer;
     public void SetMovementSpeedModifier(int InSpeed) => SpeedModifer = InSpeed;
+    public TempoCharacter GetOwningCharacter() => OwningCharacter;
 }

@@ -7,7 +7,7 @@ using System;
 public class LootTable : MonoBehaviour
 {
     [Serializable]
-    public class SLootTable
+    public class FLootTable
     {
         public ItemBase Item; // Item class to drop
         [Range(1, 100)] public int ItemWeight; // Chance item can drop
@@ -15,7 +15,7 @@ public class LootTable : MonoBehaviour
     }
 
     [TableList(AlwaysExpanded = true, DrawScrollView = false)]
-    public List<SLootTable> LocalLootTable = new List<SLootTable>() { new SLootTable() };
+    public List<FLootTable> LocalLootTable = new List<FLootTable>() { new FLootTable() };
 
     private List<ItemBase> ItemsToDrop = new List<ItemBase>();
 
@@ -30,7 +30,7 @@ public class LootTable : MonoBehaviour
         // Ensure there are no items in the list
         ItemsToDrop.Clear();
 
-        foreach (SLootTable CurrentItem in LocalLootTable)
+        foreach (FLootTable CurrentItem in LocalLootTable)
         {
             int ItemDropWeight = UnityEngine.Random.Range(1, 100);
             // Chance the item will drop
@@ -50,7 +50,7 @@ public class LootTable : MonoBehaviour
     /// Modifies the stack size for a given item
     public void ModifyStackSizeForItem(ItemBase InItem, int NewStackSize, bool SetMin)
     {
-        foreach (SLootTable CurrentLootItem in LocalLootTable)
+        foreach (FLootTable CurrentLootItem in LocalLootTable)
         {
             // Check the InItem is the current item
             if (CurrentLootItem.Item.GetType() == InItem.GetType())
@@ -69,7 +69,7 @@ public class LootTable : MonoBehaviour
     /// Modifies the stack weight of given item
     public void ModifyItemWeightForItem(ItemBase InItem, int NewStackWeight)
     {
-        foreach (SLootTable CurrentLootItem in LocalLootTable)
+        foreach (FLootTable CurrentLootItem in LocalLootTable)
         { 
             // Check the InItem is the current item
             if (CurrentLootItem.Item.GetType() == InItem.GetType())
@@ -88,7 +88,7 @@ public class LootTable : MonoBehaviour
     public List<ItemBase> GetDropItems() => ItemsToDrop;
 
     /// Gets this loot table
-    public List<SLootTable> GetLootTable() => LocalLootTable;
+    public List<FLootTable> GetLootTable() => LocalLootTable;
 
     /// Will recalculate the items to drop
     public void ReroleItemsToDrop() => CalculateItemsToDrop();

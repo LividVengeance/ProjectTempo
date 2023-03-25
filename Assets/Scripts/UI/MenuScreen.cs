@@ -14,7 +14,7 @@ public class MenuScreen : MonoBehaviour
     [SerializeField] string ScreenName;
     [SerializeField] EVirtualCursorType VirtualCursorType;
 
-    private GameHUD GameHud;
+    private MenuManager OwningMenuManager;
 
     public FTrasnistionSettings DefaultTransitionSettings;
     public FTrasnistionSettings InstantTransitionSettings;
@@ -35,7 +35,7 @@ public class MenuScreen : MonoBehaviour
         InstantTransitionSettings.Screen = this;
         InstantTransitionSettings.HoldFadeTime = 0.0f;
 
-        GameHud = TempoManager.Instance.GetGameHUD();
+        OwningMenuManager = TempoManager.Instance.GetMenuManager();
     }
 
     public string GetMenuName()
@@ -50,13 +50,25 @@ public class MenuScreen : MonoBehaviour
 
     public virtual void SwitchTo()
     {
-
+        // Handle in child
     }
 
     public virtual void SwitchAway()
     {
-
+        // Handle in child
     }
 
-    public GameHUD GetGameHUD() => GameHud;
+    public virtual bool OnActionDown(string InActionName)
+    {
+        // Handle in child
+        return false;
+    }
+
+    public virtual bool OnActionUp(string InActionName)
+    {
+        // Handle in child
+        return false;
+    }
+
+    public MenuManager GetMenuManager() => OwningMenuManager;
 }
