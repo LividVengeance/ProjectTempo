@@ -10,10 +10,11 @@ public class TempoMenuLibrary : MonoBehaviour
     Dictionary<string, MenuScreen> TempoMenuScreens = new Dictionary<string, MenuScreen>();
 
     [SerializeField] public string PauseScreenName = "PauseMenu";
+    [SerializeField] public string InventoryScreenName = "InventoryScreen";
     [Header("Debug")]
     [SerializeField] private bool bDisplayDebugInfo = false;
 
-    void Start()
+    void Awake()
     {
         TempoManager = TempoManager.Instance;
         InputManager = TempoManager.GetInputManager();

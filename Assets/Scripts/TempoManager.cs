@@ -14,6 +14,7 @@ public class TempoManager : MonoBehaviour
     private MenuManager MenuManager;
 
     private TempoGameUserSettings GameUserSettings; // This will likely need to moved later 
+    private TempoGameSystemSettings GameSystemSettings;
 
     private int PauseStack = 0;
 
@@ -39,6 +40,7 @@ public class TempoManager : MonoBehaviour
         if (!MenuManager) Debug.LogError("Unable To Find Menu Manager");
 
         GameUserSettings = GetComponent<TempoGameUserSettings>();
+        GameSystemSettings = GetComponent<TempoGameSystemSettings>();
     }
 
     public void IncrimentPauseStack()
@@ -64,4 +66,5 @@ public class TempoManager : MonoBehaviour
     public InputManager GetInputManager() => InputManager;
     public MenuManager GetMenuManager() => MenuManager;
     public TempoGameUserSettings GetGameUserSettings() => GameUserSettings;
+    public TempoGameSystemSettings GetGameSystemSettings() => GameSystemSettings;
 }

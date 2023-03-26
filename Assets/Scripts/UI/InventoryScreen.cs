@@ -21,7 +21,6 @@ public class InventoryScreen : MenuScreen
         MenuManager = TempoManager.Instance.GetMenuManager();
         
         CloseInventory();
-        InventoryComponent = TempoManager.Instance.GetHeroCharacter().GetHeroInventoryComponent(); 
         InventoryComponent.GetInventoryUpdateEvent().AddListener(UpdateInventoryUI);
     }
 
@@ -45,7 +44,7 @@ public class InventoryScreen : MenuScreen
         }
         
         // Populate Inventory UI
-        foreach (ItemBase Item in InventoryComponent.GetInventoryItemList())
+        foreach (ItemBase Item in TempoManager.Instance.GetHeroCharacter().GetHeroInventoryComponent().GetInventoryItemList())
         {
             var ItemUI = Instantiate(ItemUIPrefab, Vector3.zero, Quaternion.identity, InventoryUIContent);
             ItemUI.GetComponent<InventoryItemWidget>().SetItemInfo(Item.ItemIcon, Item.ItemName, Item.ShortDescription,
@@ -57,7 +56,7 @@ public class InventoryScreen : MenuScreen
     {
         if (bCanOpenInventory)
         {
-            MenuManager.StartTransitionToScreen(DefaultTransitionSettings);
+            TempoManager.Instance.GetMenuManager().StartTransitionToScreen(DefaultTransitionSettings);
             UpdateInventoryUI();
         }
 

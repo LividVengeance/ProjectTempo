@@ -203,7 +203,7 @@ public class MenuManager : MonoBehaviour
         }
     }
 
-    private MenuScreen FindScreenOfName(string ScreenName)
+    public MenuScreen FindScreenOfName(string ScreenName)
     {
         for (int Index = TempoMenuLibrary.transform.childCount -1; Index >= 0; Index--)
         {

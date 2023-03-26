@@ -83,7 +83,7 @@ MonoBehaviour:
   TempoMenuLibrary: {fileID: 0}
   FadeScreen: {fileID: 6608011546689420872}
   bFadeFromAwake: 1
-  bDisplayDebugInfo: 0
+  bDisplayDebugInfo: 1
 --- !u!212 &6608011546689420872
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -204,7 +204,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1155578928766914646, guid: be241c53c5b6144488d8943ac9376cc5, type: 3}
   m_PrefabInstance: {fileID: 6036863791893484072}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &272507248
+--- !u!114 &2477421950162575319
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -213,9 +213,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 4885929831804338814}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30b0cb3ae26a67247a6538525c0a45ea, type: 3}
+  m_Script: {fileID: 11500000, guid: 4ed4b2e167218394da3c49e9e0cb853f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6451226625363429110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4885929831804338814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e83a558075ea4441b49f62015f18e0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InputIcons: {fileID: 11400000, guid: 1137f80103209a442aa760421df31eed, type: 2}
+  ActionPromptEnlargeSize: 1.5
 --- !u!1001 &8918936179895669824
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -8,21 +8,32 @@ using Sirenix.OdinInspector;
 
 public class InputManager : MonoBehaviour
 {
+    public delegate void InputContextChanged(EInputType NewInputContext, FUserSettings.EInputIconType NewIconType);
+    public InputContextChanged InputContextChangedDelegate;
+
     [Header("Virtual Cursor")]
     [SerializeField] private GameObject VirtualCursorGameObject;
 
     [Header("Settings")]
     [SerializeField] private bool bEnableDebugInfo = false;
 
+    private PlayerInput PlayersInput;
     private InputMaster ActionInputMaster;
     private FGameMapInputs GameInputStruct = new FGameMapInputs();
     private Mouse CurrentMouse;
     private VirtualCursor VirtualCursor;
     private MenuManager MenuManager;
+    private TempoGameUserSettings TempoGameUserSettings;    
 
     private HeroPlayerController HeroPlayerController;
 
     private bool bCursorEnabled = false;
+
+    private EInputType CurrentInputType;
+    private EInputType PreviousInputType;
+
+    private const string GamepadControlScheme = "Gamepad";
+    private const string MouseControlScheme = "Keyboard&Mouse";
 
     public enum EInputType
     {
@@ -42,6 +53,12 @@ public class InputManager : MonoBehaviour
         VirtualCursor = TempoManager.Instance.GetMenuManager().GetVirtualCursor();
         HeroPlayerController = TempoManager.Instance.GetHeroCharacter().GetHeroController();
         MenuManager = TempoManager.Instance.GetMenuManager();
+        TempoGameUserSettings = TempoManager.Instance.GetGameUserSettings();
+
+        PlayersInput = GetComponent<PlayerInput>();
+        if (!PlayersInput) Debug.LogError("Unable to find valid PlayerInput");
+
+        PlayersInput.onControlsChanged += OnInputContextChange;
 
         SwitchToGameMap();
 
@@ -74,6 +91,8 @@ public class InputManager : MonoBehaviour
         ActionInputMaster.Menu.Unpause.canceled += OnInputActionDown;
         ActionInputMaster.Menu.Cancel.started += OnInputActionDown;
         ActionInputMaster.Menu.Cancel.canceled += OnInputActionDown;
+
+        OnInputContextChange(PlayersInput);
     }
 
     //TODO: This delegate is not being fired on input action performed
@@ -172,6 +191,79 @@ public class InputManager : MonoBehaviour
             Debug.Log("Switch To Menu Input Mapping");
         }
     }
+
+    void OnInputContextChange(PlayerInput Input)
+    {
+        PreviousInputType = CurrentInputType;
+        CurrentInputType = GetInputType(Input.currentControlScheme);
+
+        if (InputContextChangedDelegate != null)
+        {
+            InputContextChangedDelegate.Invoke(CurrentInputType, GetIconType());
+        }
+    }
+
+    private EInputType GetInputType(string InControlScheme)
+    {
+        if (InControlScheme.Equals(MouseControlScheme))
+        {
+            return EInputType.KeyboardMouse;
+        }
+        else if (InControlScheme.Equals(GamepadControlScheme))
+        {
+            return EInputType.Gamepad;
+        }
+
+        return EInputType.KeyboardMouse;
+    }
+
+    public FUserSettings.EInputIconType GetIconType()
+    {
+        switch(TempoGameUserSettings.GetInputIconType())
+        {
+            case FUserSettings.EInputIconType.Dynamic:
+                {
+                    switch (CurrentInputType)
+                    {
+                        case EInputType.KeyboardMouse: return FUserSettings.EInputIconType.KeyboardMouse;
+                        case EInputType.Gamepad:
+                            {
+                                string CurrentGamepadName = PlayersInput.devices[0].name;
+                                if (CurrentGamepadName.Contains("XInputControllerWindows"))
+                                {
+                                    return FUserSettings.EInputIconType.Xbox;
+                                }
+                                else if (CurrentGamepadName.Contains("DualSenseGamepadHID") || CurrentGamepadName.ToLower().Contains("playstation"))
+                                {
+                                    return FUserSettings.EInputIconType.Playstation;
+                                }
+                                else if (CurrentGamepadName.ToLower().Contains("switch"))
+                                {
+                                    return FUserSettings.EInputIconType.Switch;
+                                }
+                                return FUserSettings.EInputIconType.GamepadGeneric;
+                            }
+                        default:
+                            return FUserSettings.EInputIconType.KeyboardMouse;
+                    }
+                }
+            case FUserSettings.EInputIconType.KeyboardMouse: return FUserSettings.EInputIconType.KeyboardMouse;
+            case FUserSettings.EInputIconType.Playstation: return FUserSettings.EInputIconType.Playstation;
+            case FUserSettings.EInputIconType.Xbox: return FUserSettings.EInputIconType.Xbox;
+            case FUserSettings.EInputIconType.Switch: return FUserSettings.EInputIconType.Switch;
+            case FUserSettings.EInputIconType.GamepadGeneric: return FUserSettings.EInputIconType.GamepadGeneric;
+            default: return FUserSettings.EInputIconType.KeyboardMouse;
+        }
+    }
+
+    public EInputType GetCurrentInputType() => CurrentInputType;
+    public EInputType GetPreviousInputType() => PreviousInputType;
+
+    public bool IsMouseKeyboardInputType() => CurrentInputType == EInputType.KeyboardMouse;
+    public bool IsGamepadInputType() => CurrentInputType == EInputType.Gamepad;
+
+    public PlayerInput GetPlayerInput() => PlayersInput;
+    public string GetCurrentControlScheme() => PlayersInput.currentControlScheme;
 
     public Vector2 GetMovementInputState() => GameInputStruct.Movement;
 

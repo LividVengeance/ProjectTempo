@@ -19,7 +19,7 @@ public class MenuScreen : MonoBehaviour
     public FTrasnistionSettings DefaultTransitionSettings;
     public FTrasnistionSettings InstantTransitionSettings;
 
-    private void Start()
+    private void Awake()
     {
         // Default Transition Settings
         DefaultTransitionSettings.Delay = 0.0f;

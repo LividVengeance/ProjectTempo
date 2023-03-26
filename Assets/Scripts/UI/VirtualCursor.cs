@@ -5,7 +5,7 @@ using UnityEngine.InputSystem.Users;
 
 public class VirtualCursor : MonoBehaviour
 {
-    [SerializeField] private PlayerInput PlayerInput;
+    //[SerializeField] private PlayerInput PlayerInput;
     [SerializeField] private RectTransform CursorInstanceTransfrom;
     [SerializeField] private float DefaultVirtualCursorSpeed = 1000;
     [SerializeField] private RectTransform CanvasTransform;
@@ -26,10 +26,6 @@ public class VirtualCursor : MonoBehaviour
     [Header("Virtual Cursor")]
     [SerializeField] private float VerticalPadding = 35.0f;
     [SerializeField] private float HorizontalPadding = 35.0f;
-
-    private string PerviousControlScheme = "";
-    private const string GamepadControlScheme = "Gamepad";
-    private const string MouseControlScheme = "Keyboard&Mouse";
 
     private void Start()
     {
@@ -60,7 +56,7 @@ public class VirtualCursor : MonoBehaviour
         }
 
         // Pair the device to the user to use the PlayerInput compoent with the event system & the virtual mouse
-        InputUser.PerformPairingWithDevice(VirtualCursorUI, PlayerInput.user);
+        InputUser.PerformPairingWithDevice(VirtualCursorUI, InputManager.GetPlayerInput().user);
 
         if (VirtualCursorUI != null)
         {
@@ -69,17 +65,17 @@ public class VirtualCursor : MonoBehaviour
         }
 
         // Update the current control context before an input is switched
-        if (PlayerInput.currentControlScheme == MouseControlScheme)
+        if (InputManager.IsMouseKeyboardInputType())
         {
             SwitchToMouseCursor();
         }
-        else if (PlayerInput.currentControlScheme == GamepadControlScheme)
+        else if (InputManager.IsGamepadInputType())
         {
             SwitchToVirtualCursor();
         }
 
         InputSystem.onAfterUpdate += UpdateMotion;
-        PlayerInput.onControlsChanged += UpdateControlContext;
+        InputManager.InputContextChangedDelegate += OnInputContextChanged;
     }
 
     private void OnDisable()
@@ -89,7 +85,7 @@ public class VirtualCursor : MonoBehaviour
             InputSystem.RemoveDevice(VirtualCursorUI);
         }
         InputSystem.onAfterUpdate -= UpdateMotion;
-        PlayerInput.onControlsChanged -= UpdateControlContext;
+        InputManager.InputContextChangedDelegate -= OnInputContextChanged;
     }
 
     private void UpdateMotion()
@@ -133,20 +129,20 @@ public class VirtualCursor : MonoBehaviour
         CursorInstanceTransfrom.anchoredPosition = AnchoredPositon;
     }
 
-    private void UpdateControlContext(PlayerInput Input)
+    private void OnInputContextChanged(InputManager.EInputType NewInputContext, FUserSettings.EInputIconType NewIconType)
     {
         if (InputManager.IsCursorEnabled())
         {
             if (bEnaleDebugInfo)
             {
-                Debug.Log("Virtual Cursor: " + Input.currentControlScheme);
+                Debug.Log("Virtual Cursor: " + NewInputContext);
             }
             
-            if (Input.currentControlScheme == MouseControlScheme && PerviousControlScheme != MouseControlScheme)
+            if (NewInputContext == InputManager.EInputType.KeyboardMouse)
             {
                 SwitchToMouseCursor();
             }
-            else if (Input.currentControlScheme == GamepadControlScheme && PerviousControlScheme != GamepadControlScheme)
+            else if (NewInputContext == InputManager.EInputType.Gamepad)
             {
                 SwitchToVirtualCursor();
             }
@@ -159,7 +155,6 @@ public class VirtualCursor : MonoBehaviour
         Cursor.visible = false;
         InputState.Change(VirtualCursorUI.position, CurrentMouse.position.ReadValue());
         AnchorCursor(CurrentMouse.position.ReadValue());
-        PerviousControlScheme = GamepadControlScheme;
     }
 
     private void SwitchToMouseCursor()
@@ -167,15 +162,6 @@ public class VirtualCursor : MonoBehaviour
         CursorInstanceTransfrom.gameObject.SetActive(false);
         Cursor.visible = true;
         CurrentMouse.WarpCursorPosition(VirtualCursorUI.position.ReadValue());
-        PerviousControlScheme = MouseControlScheme;
-    }
-
-    public Vector2 GetCursorPosition()
-    {
-        Vector2 Position = PlayerInput.currentControlScheme == MouseControlScheme 
-            ? CurrentMouse.position.ReadValue() : VirtualCursorUI.position.ReadValue();
-
-        return Position;
     }
 
     public void EnableCursor()
@@ -195,6 +181,8 @@ public class VirtualCursor : MonoBehaviour
             Debug.Log("Disable Virtual Curor");
         }
     }
+
+    public Vector2 GetCursorPosition() => InputManager.IsMouseKeyboardInputType() ? CurrentMouse.position.ReadValue() : VirtualCursorUI.position.ReadValue();
 
     public void ModifyVirtualCursorSpeed(float InNewSpeed) => VirtualCursorSpeed = InNewSpeed;
     public float GetVirtualCursorSpeed() => VirtualCursorSpeed;

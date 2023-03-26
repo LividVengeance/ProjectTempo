@@ -32,6 +32,17 @@ public class HUDScreen : MenuScreen
         }
 
         // Handle opening inventory
+        if (InActionName == "OpenCloseInventory")
+        {
+            MenuScreen InventoryScreen;
+            if (GetMenuManager().GetMenuLibrary().GetMenuScreens().TryGetValue(GetMenuManager().GetMenuLibrary().InventoryScreenName, out InventoryScreen))
+            {
+                InventoryScreen InventoryMenuScreen = (InventoryScreen)InventoryScreen;
+                InventoryMenuScreen.OpenInventory();
+
+                bHandledInput = true;
+            }
+        }
 
         return bHandledInput;
     }

@@ -13,7 +13,7 @@ public class DataTable_InputIcons : SerializedScriptableObject
         public Dictionary<FUserSettings.EInputIconType, Sprite> InputIconTypes;
     }
 
-    public List<FInputIcons> LocalInputIcons = new List<FInputIcons>() { new FInputIcons() };
+    [SerializeField] public List<FInputIcons> LocalInputIcons = new List<FInputIcons>() { new FInputIcons() };
 
     public bool IsEmpty()
     {
@@ -43,7 +43,7 @@ public class DataTable_InputIcons : SerializedScriptableObject
     
     private bool RowHasValidInfo(int InIndex)
     {
-        if (GetInputIcon(InIndex) == null)
+        if (GetInputIconForCurrentInputType(InIndex) == null)
         {
             Debug.LogWarning("Row " + LocalInputIcons[InIndex].ActionName + " in " + name + " has an invalid input icon sprite");
             return false;
@@ -79,42 +79,41 @@ public class DataTable_InputIcons : SerializedScriptableObject
     
     public FInputIcons GetInputIconsRow(string InActionName)
     {
-        if (IsValidRow(InActionName))
+        foreach (FInputIcons InputIconRow in LocalInputIcons)
         {
-            foreach (FInputIcons InputIconRow in LocalInputIcons)
+            if (InputIconRow.ActionName.Equals(InActionName))
             {
-                if (InputIconRow.ActionName.Equals(InActionName))
-                {
-                    return InputIconRow;
-                }
+                return InputIconRow;
             }
         }
         Debug.LogWarning("No valid row found in " + name + " for action name: " + InActionName);
         return new FInputIcons();
     }
     
-    public Sprite GetInputIcon(string InActionName)
+    public Sprite GetInputIconForCurrentInputType(string InActionName)
     {
-        if (IsValidRow(InActionName))
+        FUserSettings.EInputIconType IconType = TempoManager.Instance.GetGameUserSettings().GetInputIconType();
+        Sprite Icon;
+        if (GetInputIconsRow(InActionName).InputIconTypes.TryGetValue(IconType, out Icon))
         {
-            FUserSettings.EInputIconType IconType = TempoManager.Instance.GetGameUserSettings().GetInputIconType();
-            Sprite Icon;
-            if (GetInputIconsRow(InActionName).InputIconTypes.TryGetValue(IconType, out Icon))
-            {
-                return Icon;
-            }
+            return Icon;
         }
         Debug.LogWarning("No valid sprite found in " + name + " for action name: " + InActionName);
         return null;
     }
     
-    public Sprite GetInputIcon(int InIndex)
+    public Sprite GetInputIconForCurrentInputType(int InIndex)
     {
-        if (IsValidRow(InIndex))
+        return GetInputIconForCurrentInputType(GetActionByIndex(InIndex));
+    }
+
+    public Sprite GetInputIcon(string InActionName, FUserSettings.EInputIconType InInputType)
+    {
+        Sprite Icon;
+        if (GetInputIconsRow(InActionName).InputIconTypes.TryGetValue(InInputType, out Icon))
         {
-            return GetInputIcon(GetActionByIndex(InIndex));
+            return Icon;
         }
-        Debug.LogWarning("No valid sprite found in " + name + " for index: " + InIndex);
         return null;
     }
 }
