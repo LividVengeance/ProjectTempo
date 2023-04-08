@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 public class TempoManager : MonoBehaviour
 {
-    public static TempoManager Instance { get; private set; }
+    public static TempoManager instance = null;
 
     private HUDScreen GameHud;
     private HeroCharacter HeroCharacter;
@@ -14,22 +14,25 @@ public class TempoManager : MonoBehaviour
     private MenuManager MenuManager;
 
     private TempoGameUserSettings GameUserSettings; // This will likely need to moved later 
-    private TempoGameSystemSettings GameSystemSettings;
+    static TempoGameSystemSettings GameSystemSettings;
 
     private int PauseStack = 0;
 
+    public static TempoManager Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = (TempoManager)FindObjectOfType(typeof(TempoManager));
+                GameSystemSettings = (TempoGameSystemSettings)FindObjectOfType(typeof(TempoGameSystemSettings));
+            }
+            return instance;
+        }
+    }
+
     void Awake()
     {
-        // Set up Singleton
-        if (Instance != null && Instance != this)
-        {
-            Destroy(this);
-        }
-        else
-        {
-            Instance = this;
-        }
-
         HeroCharacter = GameObject.FindWithTag("Player").GetComponent<HeroCharacter>();
         if (!HeroCharacter) Debug.LogError("Unable To Find Hero Character Controller");
         GameHud = GameObject.FindWithTag("GameHUD").GetComponent<HUDScreen>();
@@ -40,7 +43,7 @@ public class TempoManager : MonoBehaviour
         if (!MenuManager) Debug.LogError("Unable To Find Menu Manager");
 
         GameUserSettings = GetComponent<TempoGameUserSettings>();
-        GameSystemSettings = GetComponent<TempoGameSystemSettings>();
+        if (!GameUserSettings) Debug.LogError("Unable To Find Game User Settings");
     }
 
     public void IncrimentPauseStack()

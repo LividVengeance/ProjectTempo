@@ -6,6 +6,6 @@ using Unity.VisualScripting;
 [Inspectable]
 public class SGDialogueLine : MonoBehaviour
 {
-    public string DialogueLine;
+    //public string DialogueLine;
 
 }

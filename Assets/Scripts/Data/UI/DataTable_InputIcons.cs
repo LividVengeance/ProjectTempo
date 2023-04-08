@@ -14,6 +14,8 @@ public class DataTable_InputIcons : SerializedScriptableObject
     }
 
     [SerializeField] public List<FInputIcons> LocalInputIcons = new List<FInputIcons>() { new FInputIcons() };
+    [Header("Debug")]
+    [SerializeField] bool bDisplayDegbug = false;
 
     public bool IsEmpty()
     {
@@ -45,7 +47,10 @@ public class DataTable_InputIcons : SerializedScriptableObject
     {
         if (GetInputIconForCurrentInputType(InIndex) == null)
         {
-            Debug.LogWarning("Row " + LocalInputIcons[InIndex].ActionName + " in " + name + " has an invalid input icon sprite");
+            if (bDisplayDegbug)
+            {
+                Debug.LogWarning("Row " + LocalInputIcons[InIndex].ActionName + " in " + name + " has an invalid input icon sprite");
+            }
             return false;
         }
         else
@@ -63,7 +68,10 @@ public class DataTable_InputIcons : SerializedScriptableObject
                 return Index;
             }
         }
-        Debug.LogWarning("Unable to find valid row in " + name + " for action name: " + InActionName);
+        if (bDisplayDegbug)
+        {
+            Debug.LogWarning("Unable to find valid row in " + name + " for action name: " + InActionName);
+        }
         return -1;
     }
     
@@ -73,7 +81,10 @@ public class DataTable_InputIcons : SerializedScriptableObject
         {
             return LocalInputIcons[InIndex].ActionName;
         }
-        Debug.LogWarning("Unable to find valid input icon actoin row in " + name + " for index " + InIndex);
+        if (bDisplayDegbug)
+        {
+            Debug.LogWarning("Unable to find valid input icon actoin row in " + name + " for index " + InIndex);
+        }
         return "";
     }
     
@@ -86,7 +97,11 @@ public class DataTable_InputIcons : SerializedScriptableObject
                 return InputIconRow;
             }
         }
-        Debug.LogWarning("No valid row found in " + name + " for action name: " + InActionName);
+        if (bDisplayDegbug)
+        {
+            string DebugString = InActionName.Equals("") ? "EmptyActionName" : InActionName;
+            Debug.LogWarning("No valid row found in " + name + " for action name: " + DebugString);
+        }
         return new FInputIcons();
     }
     
@@ -98,7 +113,11 @@ public class DataTable_InputIcons : SerializedScriptableObject
         {
             return Icon;
         }
-        Debug.LogWarning("No valid sprite found in " + name + " for action name: " + InActionName);
+        if (bDisplayDegbug)
+        {
+            string DebugString = InActionName.Equals("") ? "EmptyActionName" : InActionName;
+            Debug.LogWarning("No valid sprite found in " + name + " for action name: " + DebugString);
+        }
         return null;
     }
     
@@ -110,9 +129,13 @@ public class DataTable_InputIcons : SerializedScriptableObject
     public Sprite GetInputIcon(string InActionName, FUserSettings.EInputIconType InInputType)
     {
         Sprite Icon;
-        if (GetInputIconsRow(InActionName).InputIconTypes.TryGetValue(InInputType, out Icon))
+        FInputIcons InputIcons = GetInputIconsRow(InActionName);
+        if (InputIcons.InputIconTypes != null)
         {
-            return Icon;
+            if (InputIcons.InputIconTypes.TryGetValue(InInputType, out Icon))
+            {
+                return Icon;
+            }
         }
         return null;
     }

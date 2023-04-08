@@ -11,7 +11,11 @@ public class InputIcon : Image
 
     protected override void OnEnable()
     {
-        TempoManager.Instance.GetInputManager().InputContextChangedDelegate += OnInputContextChange;
+        base.OnEnable();
+        if (Application.isPlaying)
+        {
+            TempoManager.Instance.GetInputManager().InputContextChangedDelegate += OnInputContextChange;
+        }
         InputIconsTable = TempoManager.Instance.GetGameSystemSettings().GetInputIcons();
         UpdatedCahcedInputIcons();
     }
@@ -38,8 +42,8 @@ public class InputIcon : Image
 
     public void SetIconBrush(string InActionName)
     {
-        ActionName = InActionName;
         UpdatedCahcedInputIcons();
+        ActionName = InActionName;
 
         Sprite NewInputIcon;
         FUserSettings.EInputIconType IconType = TempoManager.Instance.GetInputManager().GetIconType();

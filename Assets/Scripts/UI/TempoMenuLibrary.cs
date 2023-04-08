@@ -11,8 +11,8 @@ public class TempoMenuLibrary : MonoBehaviour
 
     [SerializeField] public string PauseScreenName = "PauseMenu";
     [SerializeField] public string InventoryScreenName = "InventoryScreen";
-    [Header("Debug")]
-    [SerializeField] private bool bDisplayDebugInfo = false;
+    //[Header("Debug")]
+    //[SerializeField] private bool bDisplayDebugInfo = false;
 
     void Awake()
     {

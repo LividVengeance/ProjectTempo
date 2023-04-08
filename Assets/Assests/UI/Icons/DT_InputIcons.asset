@@ -22,6 +22,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 16fda42dca8b1124186a5135df2a77ab, type: 3}
     - {fileID: 21300000, guid: e02674cae557fe84ea385e8242904b14, type: 3}
     - {fileID: 21300000, guid: be658a2a2fd52c942b7687875eaa035b, type: 3}
+    - {fileID: 21300000, guid: daf2ab606d4db0d4f9ecf4c02137d2a8, type: 3}
     - {fileID: 21300000, guid: 90b97953f4e9e7248965bf27fd9eeacc, type: 3}
     - {fileID: 21300000, guid: 69b9276d9faec2849bc4b6677c0fc967, type: 3}
     - {fileID: 21300000, guid: 687545e799f93c142be23658021e6710, type: 3}
@@ -127,7 +128,7 @@ MonoBehaviour:
       Data: 2
     - Name: 
       Entry: 12
-      Data: 3
+      Data: 4
     - Name: 
       Entry: 7
       Data: 
@@ -165,6 +166,18 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 5
+    - Name: $v
+      Entry: 10
+      Data: 6
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
       Entry: 13
       Data: 
     - Name: 
@@ -197,7 +210,7 @@ MonoBehaviour:
       Data: 1
     - Name: $v
       Entry: 10
-      Data: 6
+      Data: 7
     - Name: 
       Entry: 8
       Data: 
@@ -209,7 +222,7 @@ MonoBehaviour:
       Data: 2
     - Name: $v
       Entry: 10
-      Data: 7
+      Data: 8
     - Name: 
       Entry: 8
       Data: 
@@ -221,7 +234,7 @@ MonoBehaviour:
       Data: 3
     - Name: $v
       Entry: 10
-      Data: 8
+      Data: 9
     - Name: 
       Entry: 8
       Data: 
@@ -239,7 +252,7 @@ MonoBehaviour:
       Data: DataTable_InputIcons+FInputIcons, Assembly-CSharp
     - Name: ActionName
       Entry: 1
-      Data: OpenInventoryScreen
+      Data: OpenCloseInventory
     - Name: InputIconTypes
       Entry: 7
       Data: 5|System.Collections.Generic.Dictionary`2[[FUserSettings+EInputIconType,
@@ -258,7 +271,7 @@ MonoBehaviour:
       Data: 1
     - Name: $v
       Entry: 10
-      Data: 9
+      Data: 10
     - Name: 
       Entry: 8
       Data: 
@@ -270,7 +283,7 @@ MonoBehaviour:
       Data: 2
     - Name: $v
       Entry: 10
-      Data: 10
+      Data: 11
     - Name: 
       Entry: 8
       Data: 
@@ -282,7 +295,7 @@ MonoBehaviour:
       Data: 3
     - Name: $v
       Entry: 10
-      Data: 11
+      Data: 12
     - Name: 
       Entry: 8
       Data: 
@@ -319,7 +332,7 @@ MonoBehaviour:
       Data: 1
     - Name: $v
       Entry: 10
-      Data: 12
+      Data: 13
     - Name: 
       Entry: 8
       Data: 

@@ -84,12 +84,29 @@ public class HeroPlayerController : TempoCharacterController
             LoadPlayerData();
             bHandledInput = true;
         }
+        if (InActionName == "OpenCloseInventory")
+        {
+            TransistionToScreen("InventoryScreen");
+            bHandledInput = true;
+        }
+        if (InActionName == "Pause" || InActionName == "Unpause")
+        {
+            TransistionToScreen("PauseMenu");
+            bHandledInput = true;
+        }
         return bHandledInput;
     }
 
     private bool OnInputActionUp(string InActionName)
     {
         bool bHandledInput = false;
+
+        if (InActionName == "Pause" || InActionName == "Unpause")
+        {
+            TransistionToScreen("PauseMenu");
+            bHandledInput = true;
+        }
+
         return bHandledInput;
     }
 
@@ -112,6 +129,17 @@ public class HeroPlayerController : TempoCharacterController
     public void DeincrementDisableHeroMovementStack()
     {
         DisableHeroMovementStack--;
+    }
+
+    private void TransistionToScreen(string InScreenName)
+    {
+        FTrasnistionSettings Settings = new FTrasnistionSettings(
+                MenuManager.GetMenuLibrary().GetMenuScreens().GetValueOrDefault(InScreenName),
+                ETransitionType.FadeToScreen,
+                0.25f,
+                0.0f,
+                0.25f);
+        MenuManager.StartTransitionToScreen(Settings);
     }
 
     public bool GetHeroDisabledMovementState() => DisableHeroMovementStack > 0;

@@ -17,6 +17,15 @@ public struct FTrasnistionSettings
     public float TransitionTime;
     public float Delay;
     public float HoldFadeTime;
+
+    public FTrasnistionSettings(MenuScreen InScreen, ETransitionType InTransitionType, float InTransitionTime, float InDelay, float InHoldFadeTime)
+    {
+        Screen = InScreen;
+        TransitionType = InTransitionType;
+        TransitionTime = InTransitionTime;
+        Delay = InDelay;
+        HoldFadeTime = InHoldFadeTime;
+    }
 }   
 
 
@@ -27,6 +36,7 @@ public class MenuManager : MonoBehaviour
     MenuScreen CurrentActiveScreen = null;
     MenuScreen LastActiveScreen = null;
     FTrasnistionSettings DefaultSettings;
+    bool bIsTransitioning = false;
 
     [Header("Menu Library")]
     [SerializeField] string ActiveScreenName = "HUDScreen";
@@ -71,17 +81,24 @@ public class MenuManager : MonoBehaviour
 
     public void StartTransitionToScreen(FTrasnistionSettings Settings)
     {
-        LastActiveScreen = CurrentActiveScreen;
-        CurrentActiveScreen = Settings.Screen;
-        
-        if (CurrentActiveScreen)
+        if (bIsTransitioning)
         {
-            CurrentActiveScreen.gameObject.SetActive(true);
+            Debug.LogWarning("Atempting to transistion while currently transitioning");
+            return;
         }
+        else
+        {
+            bIsTransitioning = true;
 
-        if (bDisplayDebugInfo) Debug.Log("Transition From: " + LastActiveScreen + " Screen To: " + CurrentActiveScreen + " Screen");
+            string FromScreenName = !CurrentActiveScreen || CurrentActiveScreen.name.Equals("") ? "Empty" : CurrentActiveScreen.name;
+            string ToScreenName = Settings.Screen.name.Equals("") ? "Empty" : Settings.Screen.name;
 
-        StartCoroutine(InternalTransition(Settings));
+            LastActiveScreen = CurrentActiveScreen;
+            CurrentActiveScreen = null;
+
+            if (bDisplayDebugInfo) Debug.Log("Transition From: " + FromScreenName + " To " + ToScreenName);
+            StartCoroutine(InternalTransition(Settings));
+        }
     }
 
     /// This should only ever be called through MenuManager::StartTransitionToScreen()
@@ -118,12 +135,12 @@ public class MenuManager : MonoBehaviour
             case ETransitionType.FadeToScreen:
                 {
                     Settings.TransitionType = ETransitionType.FadeIn;
-                    StartTransitionToScreen(Settings);
+                    StartCoroutine(InternalTransition(Settings));
                     yield return new WaitForSeconds(Settings.TransitionTime);
                     if (bDisplayDebugInfo) Debug.Log("Start Fade Hold Wait");
                     yield return new WaitForSeconds(Settings.HoldFadeTime);
                     Settings.TransitionType = ETransitionType.FadeOut;
-                    StartTransitionToScreen(Settings);
+                    StartCoroutine(InternalTransition(Settings));
                     break;
                 }
             case ETransitionType.Instant:
@@ -142,7 +159,9 @@ public class MenuManager : MonoBehaviour
 
     private void OnTransitoinEnd(FTrasnistionSettings Settings)
     {
-        if (LastActiveScreen && LastActiveScreen != CurrentActiveScreen)
+        CurrentActiveScreen = Settings.Screen;
+
+        if (LastActiveScreen)
         {
             LastActiveScreen.SwitchAway();
             LastActiveScreen.gameObject.SetActive(false);
@@ -172,6 +191,7 @@ public class MenuManager : MonoBehaviour
                     }
             }
         }
+        bIsTransitioning = false;
     }
 
     /// Handle pressed input for the current active screen. RetrunVal: has input been handled

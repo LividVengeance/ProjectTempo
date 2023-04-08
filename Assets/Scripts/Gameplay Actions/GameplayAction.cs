@@ -8,6 +8,10 @@ public abstract class GameplayAction
     private GameObject OwningGameObject;
     private readonly TempoCharacterController OwningCharacter;
     protected ActionSystemComponent ActionSystem;
+
+    public delegate void GameplayActionDelegate(GameplayAction Action);
+    private GameplayActionDelegate OnActionStarted;
+    private GameplayActionDelegate OnActionEnded;
     
     public GameplayAction(ActionSystemComponent ActionSystemComponent, GameObject OwningGameObject)
     {
@@ -16,13 +20,25 @@ public abstract class GameplayAction
         this.OwningCharacter = OwningGameObject.GetComponent<TempoCharacterController>();
     }
     
-    public virtual void StartAction() { }
+    public virtual void StartAction() 
+    {
+        if (OnActionStarted != null)
+        {
+            OnActionStarted.Invoke(this);
+        }
+    }
 
     public virtual void UpdateAction() { }
 
     public virtual void PhysicsUpdateAction() { }
 
-    public virtual void EndAction() { }
+    public virtual void EndAction() 
+    {
+        if (OnActionEnded != null)
+        {
+            OnActionEnded.Invoke(this); 
+        }
+    }
 
     public bool WillActionUpdate() => bWillActionUpdate;
     public bool WillActionPhysicsUpdate() => bWillActionPhysicsUpdate;
@@ -30,4 +46,7 @@ public abstract class GameplayAction
     protected void SetWillActionPhysicsUpdate(bool bWillUpdate) => bWillActionPhysicsUpdate = bWillUpdate;
     protected TempoCharacterController GetOwningCharacter() => OwningCharacter;
     protected Vector3 GetMouseWorldPosition(Vector3 ScreenPosition, Camera WorldCamera) => WorldCamera.ScreenToWorldPoint(ScreenPosition);
+
+    public GameplayActionDelegate GetActionStartedDelegate() => OnActionStarted;
+    public GameplayActionDelegate GetActionEndedDelegate() => OnActionEnded;
 }

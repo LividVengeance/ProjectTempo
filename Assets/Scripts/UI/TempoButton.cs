@@ -10,6 +10,7 @@ public class TempoButton : Button, IPointerEnterHandler, IPointerExitHandler
     public PointerEventHandler PointerEnter;
     public PointerEventHandler PointerExit;
     public PointerEventHandler PointerDown;
+    public PointerEventHandler PointerUp;
     
     private bool bHovered = false;
 
@@ -41,14 +42,24 @@ public class TempoButton : Button, IPointerEnterHandler, IPointerExitHandler
     {
         base.OnPointerUp(eventData);
 
+        if (PointerUp != null)
+        {
+            PointerUp.Invoke(eventData);
+        }
+    }
+
+    public override void OnPointerDown(PointerEventData eventData)
+    {
+        base.OnPointerDown(eventData);
+
         if (PointerDown != null)
         {
             PointerDown.Invoke(eventData);
         }
     }
 
-    public void SetImageSize(Vector2 ImageScalar)
+    public void SetImageSize(Vector3 ImageScalar)
     {
-        image.rectTransform.sizeDelta = image.rectTransform.localScale * ImageScalar;
+        image.rectTransform.localScale += ImageScalar;
     }
 }

@@ -30,7 +30,7 @@ public struct FUserSettings
 public class TempoGameUserSettings : MonoBehaviour
 {
     private FUserSettings CurrentUserSettings;
-    private float ActionPromptHoldTime = 0.3f;
+    private float ActionPromptHoldTime = 3.0f;
 
     public FUserSettings.EInputIconType GetInputIconType()
     {
