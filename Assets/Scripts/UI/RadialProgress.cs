@@ -166,6 +166,12 @@ public class RadialProgress : MonoBehaviour
         }
     }
 
+    public void ResetProgress()
+    {
+        EndHold();
+        SetProgress(RadialProgressSettings.bReversed ? 1.0f : 0.0f);
+    }
+
     public bool IsHeld() => bIsHeld;
     public float GetProgress() => Slider.value;
 }

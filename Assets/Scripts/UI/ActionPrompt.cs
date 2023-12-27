@@ -127,7 +127,7 @@ public class ActionPrompt : SerializedMonoBehaviour
             }
             else
             {
-                PromptTriggered?.Invoke(ActionPromptSettings.InputActionName);
+                OnTrigger();
             }
         }
     }
@@ -180,7 +180,7 @@ public class ActionPrompt : SerializedMonoBehaviour
         bIsHeld = true;
         RadialProgress.StartHold();
         yield return new WaitForSeconds(ActionPromptSettings.GetActionPromptHoldTime);
-        PromptTriggered?.Invoke(ActionPromptSettings.InputActionName);
+        OnTrigger();
         bIsHeld = false;
     }
 
@@ -188,7 +188,7 @@ public class ActionPrompt : SerializedMonoBehaviour
     {
         bIsHeld = false;
         RadialProgress.EndHold();
-        HoldTimer = null;
+        StopCoroutine(HoldTimer);
     }
 
     public void SetPadding(RectOffset InPadding)
@@ -196,6 +196,15 @@ public class ActionPrompt : SerializedMonoBehaviour
         LayoutGroup.padding = InPadding;
         LayoutRebuilder.MarkLayoutForRebuild(GetComponent<RectTransform>());
     }    
+
+    private void OnTrigger(bool bResetRadialProgress = true)
+    {
+        PromptTriggered?.Invoke(ActionPromptSettings.InputActionName);
+        if (bResetRadialProgress)
+        {
+            RadialProgress.ResetProgress();
+        }
+    }
 
     public bool IsHeld => bIsHeld;
     public Coroutine GetHoldTimer => HoldTimer;
