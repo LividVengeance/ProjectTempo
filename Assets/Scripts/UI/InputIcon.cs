@@ -36,14 +36,17 @@ public class InputIcon : Image
         for (int Index = 0; Index < InputTypesCount; Index++)
         {
             InputIconsTable = TempoManager.Instance.GetGameSystemSettings().GetInputIcons();
-            InputIcons.Add((FUserSettings.EInputIconType)Index, InputIconsTable.GetInputIcon(ActionName, (FUserSettings.EInputIconType)Index));
+            if (!ActionName.Equals(""))
+            {
+                InputIcons.Add((FUserSettings.EInputIconType)Index, InputIconsTable.GetInputIcon(ActionName, (FUserSettings.EInputIconType)Index));
+            }
         }
     }
 
     public void SetIconBrush(string InActionName)
     {
-        UpdatedCahcedInputIcons();
         ActionName = InActionName;
+        UpdatedCahcedInputIcons();
 
         Sprite NewInputIcon;
         FUserSettings.EInputIconType IconType = TempoManager.Instance.GetInputManager().GetIconType();

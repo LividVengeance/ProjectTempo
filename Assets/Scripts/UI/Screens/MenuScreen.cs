@@ -15,6 +15,8 @@ public class MenuScreen : MonoBehaviour
     [SerializeField] private EVirtualCursorType VirtualCursorType;
     [SerializeField] private ActionPromptBox ActivePromptBox = null;
 
+    [SerializeField] private List<MenuSubScreen> SubScreens;
+
     private MenuManager OwningMenuManager;
 
     public FTrasnistionSettings DefaultTransitionSettings;

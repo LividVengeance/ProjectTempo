@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using System;
+using static DataTable_InputIcons;
 
 [CreateAssetMenu(fileName = "DT_InputIcons", menuName = "Data/UI/Input Icons")]
 public class DataTable_InputIcons : SerializedScriptableObject
@@ -10,7 +11,25 @@ public class DataTable_InputIcons : SerializedScriptableObject
     public struct FInputIcons
     {
         public string ActionName; // Name of input
-        public Dictionary<FUserSettings.EInputIconType, Sprite> InputIconTypes;
+        public List<FInputIconInfo> InputIconInfo;
+
+        public FInputIcons(string InActionName)
+        {
+            ActionName = InActionName;
+            InputIconInfo = new List<FInputIconInfo>();
+        }
+
+        public bool IsDataValid()
+        {
+            return !ActionName.Equals("") && InputIconInfo.Count > 0;
+        }
+    }
+
+    public struct FInputIconInfo
+    {
+        public FUserSettings.EInputIconType IconType;
+        public Sprite IconSprite;
+        public FRadialProgressSettings.ERadialType RadialType;
     }
 
     [SerializeField] public List<FInputIcons> LocalInputIcons = new List<FInputIcons>() { new FInputIcons() };
@@ -108,10 +127,13 @@ public class DataTable_InputIcons : SerializedScriptableObject
     public Sprite GetInputIconForCurrentInputType(string InActionName)
     {
         FUserSettings.EInputIconType IconType = TempoManager.Instance.GetGameUserSettings().GetInputIconType();
-        Sprite Icon;
-        if (GetInputIconsRow(InActionName).InputIconTypes.TryGetValue(IconType, out Icon))
+        FInputIcons InputIcons = GetInputIconsRow(InActionName);
+        foreach (FInputIconInfo IconInfo in InputIcons.InputIconInfo)
         {
-            return Icon;
+            if (IconInfo.IconType == IconType)
+            {
+                return IconInfo.IconSprite;
+            }
         }
         if (bDisplayDegbug)
         {
@@ -128,15 +150,31 @@ public class DataTable_InputIcons : SerializedScriptableObject
 
     public Sprite GetInputIcon(string InActionName, FUserSettings.EInputIconType InInputType)
     {
-        Sprite Icon;
         FInputIcons InputIcons = GetInputIconsRow(InActionName);
-        if (InputIcons.InputIconTypes != null)
+        if (InputIcons.IsDataValid())
         {
-            if (InputIcons.InputIconTypes.TryGetValue(InInputType, out Icon))
+            foreach (FInputIconInfo IconInfo in InputIcons.InputIconInfo)
             {
-                return Icon;
+                if (IconInfo.IconType == InInputType)
+                {
+                    return IconInfo.IconSprite;
+                }
             }
         }
         return null;
+    }
+
+    public FInputIconInfo GetInputIconInfo(string InActionName, FUserSettings.EInputIconType InInputType)
+    {
+        FInputIcons InputIcons = GetInputIconsRow(InActionName);
+
+        foreach (FInputIconInfo IconInfo in InputIcons.InputIconInfo)
+        {
+            if (IconInfo.IconType == InInputType)
+            {
+                return IconInfo;
+            }
+        }
+        return new FInputIconInfo();
     }
 }

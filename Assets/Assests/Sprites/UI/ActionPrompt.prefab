@@ -565,11 +565,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8104066109305371525, guid: 299cdb9e88664eb4b921ffa877312f22, type: 3}
       propertyPath: m_Value
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8340751288686488071, guid: 299cdb9e88664eb4b921ffa877312f22, type: 3}
       propertyPath: m_FillAmount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8999403357538069778, guid: 299cdb9e88664eb4b921ffa877312f22, type: 3}
       propertyPath: m_IsActive

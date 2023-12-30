@@ -30,6 +30,9 @@ MonoBehaviour:
     - {fileID: 21300000, guid: bd3d1ddaa2025284891f5f40bfc6c524, type: 3}
     - {fileID: 21300000, guid: 779cdcc3cdd0c804e88d1ce9bfa6dc5c, type: 3}
     - {fileID: 21300000, guid: 6fb3a28e4ff8de247a48fe65cc6b6350, type: 3}
+    - {fileID: 21300000, guid: 29a479312acdc1c4dbe6fd9420aa4b41, type: 3}
+    - {fileID: 21300000, guid: 32dee68c7d40acc4781dbbbcc292633d, type: 3}
+    - {fileID: 21300000, guid: 6dee471f0b0375e4695a5725c8f87fd1, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -41,7 +44,7 @@ MonoBehaviour:
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
-      Data: 5
+      Data: 6
     - Name: 
       Entry: 7
       Data: DataTable_InputIcons+FInputIcons, Assembly-CSharp
@@ -110,6 +113,64 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: InputIconInfo
+      Entry: 7
+      Data: 3|MS.Internal.Xml.XPath.ClonableStack`1[[DataTable_InputIcons+FInputIconInfo,
+        Assembly-CSharp]], System.Xml
+    - Name: 
+      Entry: 12
+      Data: 3
+    - Name: 
+      Entry: 7
+      Data: DataTable_InputIcons+FInputIconInfo, Assembly-CSharp
+    - Name: IconType
+      Entry: 3
+      Data: 1
+    - Name: IconSprite
+      Entry: 10
+      Data: 0
+    - Name: RadialType
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: DataTable_InputIcons+FInputIconInfo, Assembly-CSharp
+    - Name: IconType
+      Entry: 3
+      Data: 2
+    - Name: IconSprite
+      Entry: 10
+      Data: 1
+    - Name: RadialType
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: DataTable_InputIcons+FInputIconInfo, Assembly-CSharp
+    - Name: IconType
+      Entry: 3
+      Data: 3
+    - Name: IconSprite
+      Entry: 10
+      Data: 2
+    - Name: RadialType
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -121,7 +182,7 @@ MonoBehaviour:
       Data: Back
     - Name: InputIconTypes
       Entry: 7
-      Data: 3|System.Collections.Generic.Dictionary`2[[FUserSettings+EInputIconType,
+      Data: 4|System.Collections.Generic.Dictionary`2[[FUserSettings+EInputIconType,
         Assembly-CSharp],[UnityEngine.Sprite, UnityEngine.CoreModule]], mscorlib
     - Name: comparer
       Entry: 9
@@ -183,6 +244,64 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: InputIconInfo
+      Entry: 7
+      Data: 5|MS.Internal.Xml.XPath.ClonableStack`1[[DataTable_InputIcons+FInputIconInfo,
+        Assembly-CSharp]], System.Xml
+    - Name: 
+      Entry: 12
+      Data: 3
+    - Name: 
+      Entry: 7
+      Data: DataTable_InputIcons+FInputIconInfo, Assembly-CSharp
+    - Name: IconType
+      Entry: 3
+      Data: 1
+    - Name: IconSprite
+      Entry: 10
+      Data: 3
+    - Name: RadialType
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: DataTable_InputIcons+FInputIconInfo, Assembly-CSharp
+    - Name: IconType
+      Entry: 3
+      Data: 2
+    - Name: IconSprite
+      Entry: 10
+      Data: 4
+    - Name: RadialType
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: DataTable_InputIcons+FInputIconInfo, Assembly-CSharp
+    - Name: IconType
+      Entry: 3
+      Data: 3
+    - Name: IconSprite
+      Entry: 10
+      Data: 5
+    - Name: RadialType
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -194,7 +313,7 @@ MonoBehaviour:
       Data: Pause
     - Name: InputIconTypes
       Entry: 7
-      Data: 4|System.Collections.Generic.Dictionary`2[[FUserSettings+EInputIconType,
+      Data: 6|System.Collections.Generic.Dictionary`2[[FUserSettings+EInputIconType,
         Assembly-CSharp],[UnityEngine.Sprite, UnityEngine.CoreModule]], mscorlib
     - Name: comparer
       Entry: 9
@@ -244,6 +363,64 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: InputIconInfo
+      Entry: 7
+      Data: 7|MS.Internal.Xml.XPath.ClonableStack`1[[DataTable_InputIcons+FInputIconInfo,
+        Assembly-CSharp]], System.Xml
+    - Name: 
+      Entry: 12
+      Data: 3
+    - Name: 
+      Entry: 7
+      Data: DataTable_InputIcons+FInputIconInfo, Assembly-CSharp
+    - Name: IconType
+      Entry: 3
+      Data: 1
+    - Name: IconSprite
+      Entry: 10
+      Data: 7
+    - Name: RadialType
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: DataTable_InputIcons+FInputIconInfo, Assembly-CSharp
+    - Name: IconType
+      Entry: 3
+      Data: 2
+    - Name: IconSprite
+      Entry: 10
+      Data: 8
+    - Name: RadialType
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: DataTable_InputIcons+FInputIconInfo, Assembly-CSharp
+    - Name: IconType
+      Entry: 3
+      Data: 3
+    - Name: IconSprite
+      Entry: 10
+      Data: 9
+    - Name: RadialType
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -255,7 +432,7 @@ MonoBehaviour:
       Data: OpenCloseInventory
     - Name: InputIconTypes
       Entry: 7
-      Data: 5|System.Collections.Generic.Dictionary`2[[FUserSettings+EInputIconType,
+      Data: 8|System.Collections.Generic.Dictionary`2[[FUserSettings+EInputIconType,
         Assembly-CSharp],[UnityEngine.Sprite, UnityEngine.CoreModule]], mscorlib
     - Name: comparer
       Entry: 9
@@ -305,6 +482,64 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: InputIconInfo
+      Entry: 7
+      Data: 9|MS.Internal.Xml.XPath.ClonableStack`1[[DataTable_InputIcons+FInputIconInfo,
+        Assembly-CSharp]], System.Xml
+    - Name: 
+      Entry: 12
+      Data: 3
+    - Name: 
+      Entry: 7
+      Data: DataTable_InputIcons+FInputIconInfo, Assembly-CSharp
+    - Name: IconType
+      Entry: 3
+      Data: 1
+    - Name: IconSprite
+      Entry: 10
+      Data: 10
+    - Name: RadialType
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: DataTable_InputIcons+FInputIconInfo, Assembly-CSharp
+    - Name: IconType
+      Entry: 3
+      Data: 2
+    - Name: IconSprite
+      Entry: 10
+      Data: 11
+    - Name: RadialType
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: DataTable_InputIcons+FInputIconInfo, Assembly-CSharp
+    - Name: IconType
+      Entry: 3
+      Data: 3
+    - Name: IconSprite
+      Entry: 10
+      Data: 12
+    - Name: RadialType
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -316,7 +551,7 @@ MonoBehaviour:
       Data: Jump
     - Name: InputIconTypes
       Entry: 7
-      Data: 6|System.Collections.Generic.Dictionary`2[[FUserSettings+EInputIconType,
+      Data: 10|System.Collections.Generic.Dictionary`2[[FUserSettings+EInputIconType,
         Assembly-CSharp],[UnityEngine.Sprite, UnityEngine.CoreModule]], mscorlib
     - Name: comparer
       Entry: 9
@@ -366,6 +601,55 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: InputIconInfo
+      Entry: 7
+      Data: 11|MS.Internal.Xml.XPath.ClonableStack`1[[DataTable_InputIcons+FInputIconInfo,
+        Assembly-CSharp]], System.Xml
+    - Name: 
+      Entry: 12
+      Data: 3
+    - Name: 
+      Entry: 7
+      Data: DataTable_InputIcons+FInputIconInfo, Assembly-CSharp
+    - Name: IconType
+      Entry: 3
+      Data: 1
+    - Name: IconSprite
+      Entry: 10
+      Data: 13
+    - Name: RadialType
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: DataTable_InputIcons+FInputIconInfo, Assembly-CSharp
+    - Name: IconType
+      Entry: 3
+      Data: 2
+    - Name: IconSprite
+      Entry: 10
+      Data: 1
+    - Name: RadialType
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: DataTable_InputIcons+FInputIconInfo, Assembly-CSharp
+    - Name: IconType
+      Entry: 3
+      Data: 3
+    - Name: IconSprite
+      Entry: 10
+      Data: 2
+    - Name: RadialType
+      Entry: 3
+      Data: 1
     - Name: 
       Entry: 8
       Data: 
@@ -375,3 +659,142 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: DataTable_InputIcons+FInputIcons, Assembly-CSharp
+    - Name: ActionName
+      Entry: 1
+      Data: ActionOne
+    - Name: InputIconTypes
+      Entry: 7
+      Data: 12|System.Collections.Generic.Dictionary`2[[FUserSettings+EInputIconType,
+        Assembly-CSharp],[UnityEngine.Sprite, UnityEngine.CoreModule]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 13|System.Collections.Generic.EnumEqualityComparer`1[[FUserSettings+EInputIconType,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 3
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 1
+    - Name: $v
+      Entry: 10
+      Data: 14
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 2
+    - Name: $v
+      Entry: 10
+      Data: 15
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 3
+    - Name: $v
+      Entry: 10
+      Data: 16
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: InputIconInfo
+      Entry: 7
+      Data: 14|MS.Internal.Xml.XPath.ClonableStack`1[[DataTable_InputIcons+FInputIconInfo,
+        Assembly-CSharp]], System.Xml
+    - Name: 
+      Entry: 12
+      Data: 3
+    - Name: 
+      Entry: 7
+      Data: DataTable_InputIcons+FInputIconInfo, Assembly-CSharp
+    - Name: IconType
+      Entry: 3
+      Data: 1
+    - Name: IconSprite
+      Entry: 10
+      Data: 14
+    - Name: RadialType
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: DataTable_InputIcons+FInputIconInfo, Assembly-CSharp
+    - Name: IconType
+      Entry: 3
+      Data: 2
+    - Name: IconSprite
+      Entry: 10
+      Data: 15
+    - Name: RadialType
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: DataTable_InputIcons+FInputIconInfo, Assembly-CSharp
+    - Name: IconType
+      Entry: 3
+      Data: 3
+    - Name: IconSprite
+      Entry: 10
+      Data: 16
+    - Name: RadialType
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  bDisplayDegbug: 0
