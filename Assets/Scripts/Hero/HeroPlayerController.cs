@@ -19,6 +19,8 @@ public class HeroPlayerController : TempoCharacterController
     {
         UpdateControllerMovement(InContext);
         HandleHeroInputActions(InContext.action.name, InContext.phase);
+
+        EventManager.Instance.FireEvent<EventData_Example>("Example string", 6);
     }
 
     private void UpdateControllerMovement(InputAction.CallbackContext InContext)

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.XR.Interaction;
 
 public enum ETransitionType
 {
@@ -49,6 +50,9 @@ public class MenuManager : MonoBehaviour
     [Header("Debug")]
     [SerializeField] bool bDisplayDebugInfo = false;
 
+    [SerializeField] bool bDisableMenuManager = false;
+
+
     private void Awake()
     {
         FadeScreen.color = bFadeFromAwake ? new Color(0, 0, 0, 1) : new Color(0, 0, 0, 0);
@@ -60,6 +64,12 @@ public class MenuManager : MonoBehaviour
         DefaultSettings.TransitionType = ETransitionType.FadeOut;
 
         DisableAllMenuScreens();
+
+        if (bDisableMenuManager && TempoMenuLibrary)
+        {
+            TempoMenuLibrary.gameObject.SetActive(false);
+            this.gameObject.SetActive(false);
+        }
     }
 
     private void Start()

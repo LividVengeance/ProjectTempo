@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 public class TempoManager : MonoBehaviour
 {
@@ -15,6 +17,9 @@ public class TempoManager : MonoBehaviour
 
     private TempoGameUserSettings GameUserSettings; // This will likely need to moved later 
     static TempoGameSystemSettings GameSystemSettings;
+
+    private FEventDelegateHanele EventHandle;
+
 
     private int PauseStack = 0;
 
@@ -44,6 +49,15 @@ public class TempoManager : MonoBehaviour
 
         GameUserSettings = GetComponent<TempoGameUserSettings>();
         if (!GameUserSettings) Debug.LogError("Unable To Find Game User Settings");
+
+        EventHandle = EventTestMethod;
+        EventManager.Instance.AddListener<EventData_Example>(EventHandle);
+    }
+
+    private void EventTestMethod(EventData InEventData)
+    {
+        EventData_Example ExampleData = InEventData as EventData_Example;
+        Debug.Log(ExampleData.StringType);
     }
 
     public void IncrimentPauseStack()
