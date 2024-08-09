@@ -13,7 +13,6 @@ namespace LS.Conversation.ConvoNode
     using System;
     using System.Numerics;
     using UnityEditor;
-    using UnityEngine.Networking.Types;
     using UnityEngine.UIElements;
  
 
