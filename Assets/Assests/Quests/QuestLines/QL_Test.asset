@@ -12,7 +12,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aff4bec3915ed9c4b8e7e42f0d1a093c, type: 3}
   m_Name: QL_Test
   m_EditorClassIdentifier: 
-  QuestLineStates: []
+  QuestName: 
+  ShortDescription: 
+  LongDescription: 
+  QuestSteps:
+  - StepName: Talk djshf
+    QuestStepState: 2
+    CurrentCount: 0
+    MaxCount: 0
+  - StepName: 
+    QuestStepState: 0
+    CurrentCount: 0
+    MaxCount: 0
+  QuestLineStates:
+  - rid: 4704176052364903299
+  - rid: 4704176367709716480
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 4704176052364903299
+      type: {class: QuestStateTest, ns: , asm: Assembly-CSharp}
+      data:
+        TransitionInQuestTasks:
+        - rid: 4704176052364903340
+        TransitionOutQuestTasks:
+        - rid: 4704176067498475609
+        tempValue: 0
+    - rid: 4704176052364903340
+      type: {class: QuestTask_UpdateQuestStep, ns: , asm: Assembly-CSharp-firstpass}
+      data: 
+    - rid: 4704176067498475609
+      type: {class: QuestTask_GiveItem, ns: , asm: Assembly-CSharp}
+      data:
+        ItemList:
+        - {fileID: 11400000, guid: 1ef9c14c55b381c46bb1975f52a00802, type: 2}
+    - rid: 4704176367709716480
+      type: {class: QuestStateTest, ns: , asm: Assembly-CSharp}
+      data:
+        TransitionInQuestTasks: []
+        TransitionOutQuestTasks: []
+        tempValue: 0
